@@ -1,0 +1,115 @@
+//Grid  from ContentMenu.tsx - doesn't render very well
+<Grid 
+    h='30vh'
+    templateRows='repeat(5, 1fr)'
+    templateColumns='repeat(5, 1fr)'
+    // gap={1}
+    >
+
+    <GridItem 
+        rowSpan={1} 
+        colSpan={1}
+        // onMouseLeave={() => setActivatedOption(-1)}
+        _hover={{
+            cursor:'pointer',
+            color:c3, 
+            bg:c0
+        }}
+        style={{
+            // backgroundColor:'blue',
+            justifyItems:'center',
+            padding: '1vh',
+            borderRadius:'5px',
+        }}>
+            Option1
+    </GridItem>  
+
+    <GridItem
+        colSpan={4}
+        rowSpan={5}
+        style={{
+            // backgroundColor:'blue',
+            borderRadius:'5px',
+            borderLeftWidth:'1px',
+            borderStyle:'dotted',
+            borderLeftColor:c0,
+            height:'auto',
+            overflow:'scroll',
+            padding:'0 3vh'
+        }}>
+            {activatedOption}
+    </GridItem>
+
+    <GridItem 
+        rowSpan={1} 
+        colSpan={1}
+        onMouseEnter={() => setActivatedOption(2)}
+        // onMouseLeave={() => setActivatedOption(-1)}
+        _hover={{
+            cursor:'pointer',
+            color:c3, 
+            bg:c0
+        }}
+        style={{
+            // backgroundColor:'blue',
+            padding: '1vh',
+            borderRadius:'5px'
+        }}>
+            Option2
+    </GridItem>
+
+    <GridItem 
+        rowSpan={1} 
+        colSpan={1}
+        onMouseEnter={() => setActivatedOption(3)}
+        // onMouseLeave={() => setActivatedOption(-1)}
+        _hover={{
+            cursor:'pointer',
+            color:c3, 
+            bg:c0
+        }}
+        style={{
+            // backgroundColor:'blue',
+            padding: '1vh',
+            borderRadius:'5px'
+        }}>
+            Option3
+    </GridItem>
+
+    <GridItem 
+        rowSpan={1} 
+        colSpan={1}
+        onMouseEnter={() => setActivatedOption(4)}
+        // onMouseLeave={() => setActivatedOption(-1)}
+        _hover={{
+            cursor:'pointer',
+            color:c3, 
+            bg:c0
+        }}
+        style={{
+            // backgroundColor:'blue',
+            padding: '1vh',
+            borderRadius:'5px'
+        }}>
+            Option4
+    </GridItem>
+
+    <GridItem 
+        rowSpan={1} 
+        colSpan={1}
+        onMouseEnter={() => setActivatedOption(5)}
+        // onMouseLeave={() => setActivatedOption(-1)}
+        _hover={{
+            cursor:'pointer',
+            color:c3, 
+            bg:c0
+        }}
+        style={{
+            // backgroundColor:'blue',
+            padding: '1vh',
+            borderRadius:'5px'
+        }}>
+            Option5
+    </GridItem> 
+
+</Grid>
