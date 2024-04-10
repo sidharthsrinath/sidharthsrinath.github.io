@@ -1,0 +1,14 @@
+.styled-div {
+  ::-moz-selection {
+    color: var(--text-color);
+    background: var(--selection-color);
+  }
+  ::-webkit-selection {
+    color: var(--text-color);
+    background: var(--selection-color);
+  }
+  ::selection {
+    color: var(--text-color);
+    background: var(--selection-color);
+  }
+}

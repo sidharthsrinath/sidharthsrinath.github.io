@@ -1,31 +1,66 @@
 import React, { useState, useEffect } from 'react';
-import { Box, ChakraProvider, Divider, theme } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { updateTheme } from './slices/theme-slice';
 import { lightState, darkState } from './states/theme-states'; // Assume you export these
-import { ContentArea, ContentMenu } from './components';
-import Background from './components/Background';
 
+import MenuLite from './components/MenuLite';
+import { PortfolioPage } from './pages/PortfolioPage';
+import AboutPage from './pages/AboutPage';
 
 
 export const App = () => {
-  const [darkMode, setDarkMode] = useState<boolean>(false);
-  const dispatch = useDispatch();
+    /**
+     * Control Current Page Centrally
+     */
+    const [currentPage, setCurrentPage] = useState<'portfolio' | 'about'>('portfolio')
 
-  useEffect(() => {
-    const themeState = darkMode ? darkState : lightState;
-    dispatch(updateTheme(themeState));
-    console.log(themeState);
-  }, [darkMode, dispatch]);
+    /**
+     * Control Theme Mode Centrally
+     */
+    const [darkMode, setDarkMode] = useState<boolean>(false);
+    const dispatch = useDispatch();
 
+    /**
+     * Control Media Query-Based Sizing: Big Screens
+     */
+    const [isBigScreen, setIsBigScreen] = useState(
+        window.matchMedia("(min-width: 1200px)").matches
+    )
+    useEffect(() => {
+        window
+            .matchMedia("(min-width: 1200px)")
+            .addEventListener('change', e => {
+                setIsBigScreen(e.matches)
+            });
+    }, []);
 
-  return (
-    <ChakraProvider>
-        <Background>
-            <ContentMenu themeVal={darkMode} themeDispatch={setDarkMode} />
-            <ContentArea LRBalance='right' cmode='medium' text=''/>
-                        
-        </Background>
-    </ChakraProvider>
-  );
+    /**
+     * Control Media Query-Based Sizing: Small Screens
+     */
+    const [isMediumScreen, setIsMediumScreen] = useState(
+        window.matchMedia("(min-width: 800px)").matches
+    )
+    useEffect(() => {
+        window
+            .matchMedia("(min-width: 800px)")
+            .addEventListener('change', e => {
+                setIsMediumScreen(e.matches)
+            });
+    }, []);
+
+    return (
+        <ChakraProvider>
+            {/** Menu Item */}
+            <MenuLite currPage={currentPage} pageSetter={setCurrentPage}/>
+
+            {/** Main Portfolio Page */}
+            {currentPage === 'portfolio' && <PortfolioPage isBigScreen={isBigScreen} />}
+
+            {/** About Me Page */}
+            {currentPage == 'about' && <AboutPage isMediumScreen={isMediumScreen} />}
+
+        </ChakraProvider>
+    );
 };

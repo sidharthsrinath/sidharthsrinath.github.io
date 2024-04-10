@@ -9,7 +9,6 @@ const Background: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             style={{
                 margin: '1vh 5vh',
                 height:'full',
-                backgroundColor:bg
             }}>
             {children}
             </div>);

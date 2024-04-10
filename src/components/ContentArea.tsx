@@ -1,5 +1,6 @@
 import { Card, Grid, GridItem, ImageProps, Img } from "@chakra-ui/react";
 import { useSelector } from 'react-redux';
+import CustomCarousel from "./ContentCarousel";
 
 type ContentAreaProps = {
     LRBalance: 'right' | 'left'
@@ -8,7 +9,7 @@ type ContentAreaProps = {
 }
 
 const ContentArea = ({ LRBalance, cmode, text }: ContentAreaProps ) => {
-    const cardHeight: number = window.innerHeight/4;
+    const cardHeight: number = window.innerHeight/2;
     const iconSize: number = window.innerHeight/30;
 
     const { c0, c1, c2, c3, c4, c5 } = useSelector((state: any) => state.theme);
