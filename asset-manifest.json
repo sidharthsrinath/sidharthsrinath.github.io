@@ -1,14 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.1b886a59.css",
-    "main.js": "/static/js/main.56f8f53f.js",
-    "static/js/453.8d18309b.chunk.js": "/static/js/453.8d18309b.chunk.js",
+    "main.css": "/static/css/main.57137ca4.css",
+    "main.js": "/static/js/main.e6b55e6f.js",
+    "static/js/453.665a06d2.chunk.js": "/static/js/453.665a06d2.chunk.js",
+    "static/media/me_jtree.JPG": "/static/media/me_jtree.49664c086f9ae0aae324.JPG",
+    "static/media/resume_screenshot.png": "/static/media/resume_screenshot.9c969a986305f9ab7da6.png",
+    "static/media/Sidharth_Srinath_2024.pdf": "/static/media/Sidharth_Srinath_2024.201d81263d79f34e1367.pdf",
+    "static/media/sony.png": "/static/media/sony.8904dcfe9874e7a8f6d7.png",
+    "static/media/resume2.svg": "/static/media/resume2.2bdd40b7e87884824ec33f9fe11039df.svg",
     "index.html": "/index.html",
-    "main.56f8f53f.js.map": "/static/js/main.56f8f53f.js.map",
-    "453.8d18309b.chunk.js.map": "/static/js/453.8d18309b.chunk.js.map"
+    "main.57137ca4.css.map": "/static/css/main.57137ca4.css.map",
+    "main.e6b55e6f.js.map": "/static/js/main.e6b55e6f.js.map",
+    "453.665a06d2.chunk.js.map": "/static/js/453.665a06d2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1b886a59.css",
-    "static/js/main.56f8f53f.js"
+    "static/css/main.57137ca4.css",
+    "static/js/main.e6b55e6f.js"
   ]
 }
