@@ -8,6 +8,7 @@ import { lightState, darkState } from './states/theme-states'; // Assume you exp
 import MenuLite from './components/MenuLite';
 import { PortfolioPage } from './pages/PortfolioPage';
 import AboutPage from './pages/AboutPage';
+import ChatBox from './components/ChatBox';
 
 
 export const App = () => {
@@ -26,11 +27,11 @@ export const App = () => {
      * Control Media Query-Based Sizing: Big Screens
      */
     const [isBigScreen, setIsBigScreen] = useState(
-        window.matchMedia("(min-width: 1200px)").matches
+        window.matchMedia("(min-width: 1900px)").matches
     )
     useEffect(() => {
         window
-            .matchMedia("(min-width: 1200px)")
+            .matchMedia("(min-width: 1900px)")
             .addEventListener('change', e => {
                 setIsBigScreen(e.matches)
             });
@@ -40,11 +41,11 @@ export const App = () => {
      * Control Media Query-Based Sizing: Small Screens
      */
     const [isMediumScreen, setIsMediumScreen] = useState(
-        window.matchMedia("(min-width: 800px)").matches
+        window.matchMedia("(min-width: 1500px)").matches
     )
     useEffect(() => {
         window
-            .matchMedia("(min-width: 800px)")
+            .matchMedia("(min-width: 1500px)")
             .addEventListener('change', e => {
                 setIsMediumScreen(e.matches)
             });
@@ -53,13 +54,13 @@ export const App = () => {
     return (
         <ChakraProvider>
             {/** Menu Item */}
-            <MenuLite currPage={currentPage} pageSetter={setCurrentPage}/>
+            <MenuLite isSmall={isMediumScreen} currPage={currentPage} pageSetter={setCurrentPage} darkMode={darkMode} setDarkMode={setDarkMode}/>
 
             {/** Main Portfolio Page */}
-            {currentPage === 'portfolio' && <PortfolioPage isBigScreen={isBigScreen} />}
+            {currentPage === 'portfolio' && <PortfolioPage isDarkMode={darkMode} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen}/>}
 
             {/** About Me Page */}
-            {currentPage == 'about' && <AboutPage isMediumScreen={isMediumScreen} />}
+            {currentPage === 'about' && <AboutPage isMediumScreen={isMediumScreen} />}
 
         </ChakraProvider>
     );

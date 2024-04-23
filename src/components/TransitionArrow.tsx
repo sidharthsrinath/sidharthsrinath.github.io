@@ -1,98 +1,74 @@
 import { ArrowDownward } from "@mui/icons-material";
 import { useEffect, useState } from "react";
-import NextPageDownwards from "../animations/Functions/NextPageDownwards";
-import NextPageUpwardsAnimation from "../animations/Functions/NextPageUpwards";
 import FlipOverAnimation from "../animations/Components/FlipOver";
-type InputProps = {
-    setTransitionState: (arg0: boolean) => void
-}
-const Arrow: React.FC<InputProps> = ({setTransitionState}: InputProps) => {
-    // const [opacity, setOpacity] = useState<number>(1); 
-    const [deactivated, setDeactivated] = useState<boolean>(true);
-    const [activated, setActivated] = useState<boolean>(false);
-    const [isActive, setIsActive] = useState<boolean>(false);
-    const [direction, setDirection] = useState<'up' | 'down'>('down');
 
+type InputProps = {
+    arrowColor:string
+}
+
+const Arrow: React.FC<InputProps> = ({ arrowColor}) => {
+    const [atBottom, setAtBottom] = useState(false)
+    const transitionTime = .5 
 
     const handleOnClick = () => {
-        // handleArrowTransition();
-                
-        //if arrow has already been activated -> going up
-        if(activated){
-            setDirection('up')
-
-            setIsActive(true)
-
-            setActivated(false)
-
-            //page transition
-            NextPageUpwardsAnimation()
-            setTransitionState(true); 
+        console.log(atBottom)
+        if (atBottom) {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            })
+        } else {
+            const newScrollPosition = window.scrollY + window.innerHeight
+            // const newScrollPosition = (window.scrollY + window.innerHeight) - ((window.scrollY + window.innerHeight) % window.innerHeight)
+            window.scrollTo({
+                top: newScrollPosition,
+                behavior: "smooth",
+            })
         }
-        //if arrow hasn't been activated -> going down
-        else if(!activated){
-            setDirection('down')
+     }
 
-            setIsActive(true)
-
-            setActivated(true)
-
-            //page transition
-            NextPageDownwards();
-            setTransitionState(true); 
-        }        
-        
-
-    }
-
-
-    window.addEventListener("scroll", () => {
-
-        //going down
-        if(window.scrollY == 0){
-            activated &&
-                setIsActive(true)
-                setDirection('up')
-                setActivated(false)
-       }
-        if(window.scrollY === (document.documentElement.scrollHeight - document.documentElement.clientHeight)){
-            !activated &&
-            setIsActive(true)
-            setDirection('down')
-            setActivated(true)
+    useEffect(() => {
+        const handleScroll = () => {  
+            const currTopScroll = window.scrollY + window.innerHeight
+            const maxScroll = document.documentElement.scrollHeight
+            const threshold = 30
+            setAtBottom(Math.abs(maxScroll - currTopScroll) <= threshold)
         }
-    });
-    
-    return(
-        <div style={{
-            left: 0,
-            right: 0,
-            padding: '30px',
-            textAlign: 'center',
-            position: 'fixed',
-            bottom:'0', 
-            zIndex: 1000, 
-            transition: 'bottom 0.3s',
-            opacity: 1,
-            mixBlendMode:'difference',
-        }}>
-            <FlipOverAnimation isActive={isActive} direction={direction} duration={.5}>
-                {/* <MoonIcon onMouseEnter={() => setIsActive(true)}/> */}
-                    <ArrowDownward 
-                        sx={{fontSize:"5vh"}} 
-                        onClick={handleOnClick}
-                        style={{
-                            color:'#0FFF9F',
-                            cursor:'pointer',
-                         }}
-                        /> 
-            </FlipOverAnimation>
 
+        window.addEventListener("scroll", handleScroll)
 
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+        }
+    }, [])
 
+    return (
+        <div
+            style={{
+                left: 0,
+                right:0,
+                bottom: 0,
+                textAlign: "center",
+                position: "fixed",
+                zIndex: 100000000000,
+                transition: `bottom ${transitionTime}s`,
+                opacity: 1,
+                // mixBlendMode:'difference'
+            }}
+        >
+                <ArrowDownward
+                    sx={{ fontSize: "5vh" }}
+                    onClick={handleOnClick}
+                    style={{
+                        color: arrowColor,
+                        cursor: "pointer",
+                        transform: atBottom ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition:`all ${transitionTime}s`,
+                    }}
+                    
+                />
         </div>
-
-    );
+    )
 }
 
-export default Arrow;
+export default Arrow

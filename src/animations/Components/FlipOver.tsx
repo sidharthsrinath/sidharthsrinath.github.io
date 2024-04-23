@@ -1,4 +1,5 @@
 import { Box, Center, VStack, keyframes } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
 const spin = keyframes`  
     from {transform: rotateX(0deg)}
@@ -18,7 +19,7 @@ type InputProps = {
 }
 const FlipOverAnimation: React.FC<InputProps> = ({children, isActive, direction, duration=1}: InputProps) => {   
     const spinAnimation = direction === 'down' ?  `${spin} ${duration}s linear forwards` : `${spinBack} ${duration}s linear forwards`;
-    
+
     return (
         <Center>
             <VStack spacing={20}>

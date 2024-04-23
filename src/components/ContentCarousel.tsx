@@ -38,19 +38,12 @@ export default function CustomCarousel() {
                     setActiveSlide(swiper.activeIndex - 1)
                     setExpanded(-1)
                 }}
-                // modules={[Mousewheel]}
                 direction='horizontal'
                 speed={200}
                 slidesPerView={1}
                 spaceBetween={30}
-                // freeMode={true}
-                // mousewheel={true}
                 grabCursor={true}
                 className="mySwiper"
-                // autoplay={{
-                //     delay: 5000,
-                //     disableOnInteraction: true,
-                // }}
                 style={{
                     overflowX: 'auto',
                     overflowY: 'hidden',
