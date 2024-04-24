@@ -22,8 +22,9 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, darkMode
     const fontSize = isSmall ? 30 : 15
     const menuY = isSmall ? 15 : 20
     const spacingX = isSmall ? 10 : 7
-    // const bgColor = darkMode ? '#B70404' : '#FBFBFB'
-    const bgColor = 'transparent'
+    const opacity = 95
+    const bgColor = darkMode ? `#B70404${opacity}` : `#FBFBFB${opacity}`
+    // const bgColor = 'transparent'
     const textColor = darkMode ? "#FEF2F4"  : '#F31559'
 
     const [hidden, setHidden] = useState<boolean>(false)
@@ -132,7 +133,7 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, darkMode
                     }}
                     className="menubtn"
                     style={{
-                        borderRadius: '8px',
+                        borderRadius: '30px',
                         border : `1px solid ${textColor}`,
                         backgroundColor:bgColor,
                         color: textColor,

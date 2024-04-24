@@ -33,15 +33,15 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ isDarkMode, isBigS
 
     const textUnderlineColor = isDarkMode ? '#FB8B24' : '#FF9800'
 
-    const titleBgColor = isDarkMode ? '#FB8B24' : "#FCFFE7"
+    const titleBgColor = isDarkMode ? '#FB8B24' : "#72FFFF"
 
     return (
         <div
             style={{
                 position: 'relative', // Positioned relatively to restrict cursor circle
                 // overflowX: 'hidden', // meant for cursor circle to npt create extra space - taken out cuz no more cursor circle + dynamic
-                width: '100%',
-                // overflowY: 'scroll',
+                // width: '100%',
+                // overflowY: 'auto',
                 // scrollbarWidth: 'none',
             }}
         >
@@ -62,9 +62,9 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ isDarkMode, isBigS
                 <IntroArea accentColor={textUnderlineColor} bgColor={bgColorMain} textColor={textColorMain} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen} />
 
                 {/** ITEM 2-4 */}
-                <ProjectArea titleBgColor={titleBgColor} bgColor={bgColorSecondary} textColor={textColorSecondary} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen} />
-                <ProjectArea titleBgColor={titleBgColor} bgColor={bgColorSecondary} textColor={textColorSecondary} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen} />
-                <ProjectArea titleBgColor={titleBgColor} bgColor={bgColorSecondary} textColor={textColorSecondary} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen} />
+                <ProjectArea key={1} titleBgColor={titleBgColor} bgColor={bgColorSecondary} textColor={textColorSecondary} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen} layer={2}/>
+                <ProjectArea key={2} titleBgColor={titleBgColor} bgColor={bgColorSecondary} textColor={textColorSecondary} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen} layer={3}/>
+                <ProjectArea titleBgColor={titleBgColor} bgColor={bgColorSecondary} textColor={textColorSecondary} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen} layer={4}/>
 
 
             </div>

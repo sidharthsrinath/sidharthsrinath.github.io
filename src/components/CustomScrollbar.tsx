@@ -22,10 +22,12 @@ const SinglePageScroll: React.FC<SinglePageScrollProps> = ({ containerColor, scr
     const minContainerHeight = '10px'
     const containerHeight = isActive ? isHovered ? 9 : 7 : 2
     const containerBorder = `1px solid ${scrollColor}`
+    const containerTransition = `all ${transitionTime}s`
 
     //inner bar style
-    const innerVertOffset = full ? 0 : isActive ? `${Math.min(0, progress - 100)}%` : -100
+    const innerVertOffset = full ? 0 : isActive ? `${Math.min(0, progress - 100)}%` : isHovered ? 0 : -100
     const innerBarHeight = 100
+    const innerBarTransition = isActive && !full ? `` : `all ${1.5 * transitionTime}s`
 
     useEffect(() => {
         const scrollHandler = () => {
@@ -76,7 +78,7 @@ const SinglePageScroll: React.FC<SinglePageScrollProps> = ({ containerColor, scr
                 alignItems: 'center',
                 justifyContent: 'center',
                 overflow: 'hidden',
-                transition: `all ${transitionTime}s`,
+                transition: containerTransition,
                 transform: interactTransform,
             }}
         >
@@ -93,6 +95,7 @@ const SinglePageScroll: React.FC<SinglePageScrollProps> = ({ containerColor, scr
                     alignItems: 'center',
                     justifyContent: 'center',
                     opacity: .8,
+                    transition:innerBarTransition
                 }}
             >
             </div>
@@ -112,7 +115,7 @@ const CustomScrollbar: React.FC<CustomScrollBarProps> = ({ colors, pageColors })
     const containerRightOffset = 10
     const containerHeight = 100
     const spacing = 10
-
+    
     useEffect(() => {
         // const maxHeight = Math.max( document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight )
         const maxHeight = document.body.scrollHeight
