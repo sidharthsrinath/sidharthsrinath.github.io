@@ -1,8 +1,11 @@
 import { Button } from "@chakra-ui/react"
-import { DensityLarge, FirstPage, GitHub, NightsStay, Person, WbSunny, Web } from "@mui/icons-material"
+import { DensityLarge, FirstPage, GitHub, LastPage, NightsStay, Person, WbSunny, Web } from "@mui/icons-material"
 import { useEffect, useState } from "react"
 import { FaRegPaperPlane } from "react-icons/fa"
+import ResumeArrow from "../assets/pointeraArrow.gif";
+
 import { ReactComponent as Resume2 } from "../assets/resume2.svg";
+import { SunIcon } from "@chakra-ui/icons";
 
 type MenuProps = {
     isSmall: boolean
@@ -13,7 +16,15 @@ type MenuProps = {
     setDarkMode: (arg0: boolean) => void
 }
 
-const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, arrowActive = false, darkMode, setDarkMode }) => {
+const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, darkMode, setDarkMode }) => {
+
+    const transitionTime = 0.8
+    const fontSize = isSmall ? 30 : 15
+    const menuY = isSmall ? 20 : 30
+    const spacingX = isSmall ? 10 : 7
+    const bgColor = darkMode ? '#B70404' : '#FBFBFB'
+    const textColor = darkMode ? "#FEF2F4" : '#F31559'
+
     const [hidden, setHidden] = useState<boolean>(false)
     const [menuActive, setMenuActive] = useState<boolean>(false)
     const [activate, setActivate] = useState<boolean>(false)
@@ -95,14 +106,6 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, arrowAct
         };
     }, [hidden, menuActive]);
 
-    const transitionTime = 0.8
-    const fontSize = isSmall ? 30 : 15
-    const menuBtnX = 20
-    const menuX = '35%'
-    const menuY = isSmall ? 15 : 20
-    const spacingX = isSmall ? 15 : 7
-
-
     return (
         <div
             style={{
@@ -113,14 +116,13 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, arrowAct
             <div
                 id="menubtn"
                 style={{
-                    left: hidden ? -100 : menuBtnX,
+                    right: hidden ? -100 : 30,
                     top: hidden ? -100 : menuY - 10,
                     margin: `${spacingX}px`,
                     position: 'fixed',
                     zIndex: 100000,
                     transition: `all ${transitionTime}s`,
                     opacity: 1,
-                    // mixBlendMode: 'difference',
                 }}>
                 <Button
                     onClick={() => {
@@ -130,6 +132,9 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, arrowAct
                     className="menubtn"
                     style={{
                         borderRadius: '8px',
+                        border: `1px solid ${textColor}`,
+                        backgroundColor: bgColor,
+                        color: textColor,
                     }}
                 >
                     <DensityLarge
@@ -143,50 +148,75 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, arrowAct
 
             <div
                 style={{
-                    border: '1px solid white',
-                    backgroundColor:'black',
-                    borderRadius:'50px',
-                    left: !menuActive ? -1000 : menuX,
+                    right: menuActive ? 30 : -1000,
                     top: menuY,
-                    padding: '10px 30px',
-                    color: 'black',
+                    color: textColor,
                     display: 'flex',
                     flexDirection: 'row',
-                    gap: spacingX,
                     position: 'fixed',
                     zIndex: 100000,
-                    // mixBlendMode: 'difference',
                     transition: `all ${transitionTime}s`,
-                    alignItems:'center',
-                    justifyContent:'center',
                 }}
             >
+                {/** Menu Close Item */}
+                <div
+                    id='closebtn'
+                    style={{
+                        margin: `0 ${spacingX}px`,
+                        zIndex: 100000,
+                        transition: `all ${transitionTime}s`,
+                        opacity: 1,
+                    }}
+                >
+                    <Button
+                        onClick={() => {
+                            setHidden(false)
+                            setMenuActive(false)
+                        }}
+                        style={{
+                            backgroundColor: 'transparent',
+                            color: textColor,
+                        }}
+                    >
+                        <LastPage
+                            style={{
+                                minWidth: `${fontSize}px`,
+                                maxWidth: `${fontSize}px`,
+                            }}
+                        />
+                    </Button>
+                </div>
                 {/** Menu Item 1 */}
                 <div
                     style={{
                         position: 'relative',
+                        margin: `0 ${spacingX}px`,
                         zIndex: 100000,
                         transition: `all ${transitionTime}s`,
                         opacity: 1,
-                        overflowX:'hidden',
+                        overflowX: 'hidden',
                     }}>
                     <Button
                         onClick={() => { setDarkMode(!darkMode) }}
                         style={{
                             borderRadius: '30px',
                             overflowX: 'hidden',
-                            width: `${2 * fontSize}px`,
+                            minWidth: `${2 * fontSize}px`,
                             justifyItems: 'center',
-                            alignItems: 'center'
+                            alignItems: 'center',
+                            color: textColor,
+                            border: `1px solid ${textColor}`,
+                            backgroundColor: bgColor,
                         }}
                     >
+
                         <NightsStay
                             style={{
                                 position: 'absolute',
                                 minWidth: `${fontSize}px`,
                                 maxWidth: `${fontSize}px`,
                                 transform: darkMode ? 'translateX(0px)' : 'translateX(-100px)',
-                                transition: 'transform .3s',
+                                transition: 'all .3s'
                             }}
                         />
                         <WbSunny
@@ -195,7 +225,7 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, arrowAct
                                 minWidth: `${fontSize}px`,
                                 maxWidth: `${fontSize}px`,
                                 transform: darkMode ? 'translateX(100px)' : 'translateX(0px)',
-                                transition: 'transform .3s'
+                                transition: 'all .3s'
                             }}
                         />
 
@@ -205,9 +235,11 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, arrowAct
                 {/** Menu Item 2 */}
                 <div
                     style={{
+                        margin: `0 ${spacingX}px`,
                         zIndex: 100000,
                         transition: `all ${transitionTime}s`,
                         opacity: 1,
+
                     }}>
                     <Button
                         onClick={() => {
@@ -215,6 +247,9 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, arrowAct
                         }}
                         style={{
                             borderRadius: '30px',
+                            color: textColor,
+                            border: `1px solid ${textColor}`,
+                            backgroundColor: bgColor,
                         }}
                     >
                         <FaRegPaperPlane
@@ -229,6 +264,7 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, arrowAct
                 {/** Menu Item 3 */}
                 <div
                     style={{
+                        margin: `0 ${spacingX}px`,
                         zIndex: 100000,
                         transition: `all ${transitionTime}s`,
                         opacity: 1,
@@ -237,6 +273,9 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, arrowAct
                         onClick={() => window.open(require('../assets/Sidharth_Srinath_2024.pdf'), '_blank')}
                         style={{
                             borderRadius: '30px',
+                            color: textColor,
+                            border: `1px solid ${textColor}`,
+                            backgroundColor: bgColor,
                         }}
                     >
                         <Resume2
@@ -252,6 +291,7 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, arrowAct
                 {/** Menu Item 4 */}
                 <div
                     style={{
+                        margin: `0 ${spacingX}px`,
                         zIndex: 100000,
                         transition: `all ${transitionTime}s`,
                         opacity: 1,
@@ -262,6 +302,9 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, arrowAct
                         }}
                         style={{
                             borderRadius: '30px',
+                            color: textColor,
+                            border: `1px solid ${textColor}`,
+                            backgroundColor: bgColor,
                         }}
                     >
                         <GitHub
@@ -276,6 +319,7 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, arrowAct
                 {/** Menu Item 5 */}
                 <div
                     style={{
+                        margin: `0 ${spacingX}px`,
                         zIndex: 100000,
                         transition: `all ${transitionTime}s`,
                         opacity: 1,
@@ -286,6 +330,9 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, arrowAct
                         }}
                         style={{
                             borderRadius: '30px',
+                            color: textColor,
+                            border: `1px solid ${textColor}`,
+                            backgroundColor: bgColor,
                         }}
                     >
                         {
@@ -307,36 +354,6 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, arrowAct
                         }
                     </Button>
                 </div>
-
-                {/** Menu Close Item */}
-                <div
-                    id='closebtn'
-                    style={{
-                        zIndex: 100000,
-                        transition: `all ${transitionTime}s`,
-                        opacity: 1,
-                    }}
-                >
-                    <Button
-                        onClick={() => {
-                            setHidden(false)
-                            setMenuActive(false)
-                        }}
-                        style={{
-                            backgroundColor: 'transparent',
-                            color: 'white',
-                        }}
-                    >
-                        <FirstPage
-                            style={{
-                                minWidth: `${fontSize}px`,
-                                maxWidth: `${fontSize}px`,
-                            }}
-                        />
-                    </Button>
-                </div>
-
-
             </div>
         </div>
 

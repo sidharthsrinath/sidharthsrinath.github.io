@@ -53,15 +53,15 @@ export const App = () => {
 
     return (
         <ChakraProvider>
-            {/** Menu Item */}
-            <MenuLite isSmall={isMediumScreen} currPage={currentPage} pageSetter={setCurrentPage} darkMode={darkMode} setDarkMode={setDarkMode}/>
 
-            {/** Main Portfolio Page */}
-            {currentPage === 'portfolio' && <PortfolioPage isDarkMode={darkMode} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen}/>}
+                {/** Menu Item */}
+                <MenuLite isSmall={isMediumScreen} currPage={currentPage} pageSetter={setCurrentPage} darkMode={darkMode} setDarkMode={setDarkMode} />
 
-            {/** About Me Page */}
-            {currentPage === 'about' && <AboutPage isMediumScreen={isMediumScreen} />}
+                {/** Main Portfolio Page */}
+                {currentPage === 'portfolio' && <PortfolioPage isDarkMode={darkMode} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen} />}
 
+                {/** About Me Page */}
+                {currentPage === 'about' && <AboutPage isMediumScreen={isMediumScreen} />}
         </ChakraProvider>
     );
 };

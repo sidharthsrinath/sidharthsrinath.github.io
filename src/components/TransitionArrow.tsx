@@ -11,7 +11,6 @@ const Arrow: React.FC<InputProps> = ({ arrowColor}) => {
     const transitionTime = .5 
 
     const handleOnClick = () => {
-        console.log(atBottom)
         if (atBottom) {
             window.scrollTo({
                 top: 0,
@@ -47,10 +46,10 @@ const Arrow: React.FC<InputProps> = ({ arrowColor}) => {
             style={{
                 left: 0,
                 right:0,
-                bottom: 0,
+                bottom: 10,
                 textAlign: "center",
                 position: "fixed",
-                zIndex: 100000000000,
+                zIndex: 100000,
                 transition: `bottom ${transitionTime}s`,
                 opacity: 1,
                 // mixBlendMode:'difference'

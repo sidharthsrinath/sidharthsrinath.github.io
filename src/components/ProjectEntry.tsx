@@ -1,4 +1,4 @@
-import { BackHand, CloseSharp } from "@mui/icons-material"
+import { ArrowOutward, BackHand, CloseSharp } from "@mui/icons-material"
 import { useEffect, useRef, useState } from "react"
 
 type Element = {
@@ -11,18 +11,19 @@ type Element = {
 }
 
 type ProjectEntryProps = {
+    id: string
     key: number
     isBigScreen: boolean
     isMediumScreen: boolean
     textColor: string
-    bgColor: string
+    bgColor?: string
     descInfo: string
     imgInfo: string
     toolsInfo: string
     tagInfo: string
 }
 
-const ProjectEntry: React.FC<ProjectEntryProps> = ({ key, textColor, imgInfo, descInfo, toolsInfo, tagInfo, isBigScreen, isMediumScreen, bgColor }) => {
+const ProjectEntry: React.FC<ProjectEntryProps> = ({ id, key, textColor, imgInfo, descInfo, toolsInfo, tagInfo, isBigScreen, isMediumScreen }) => {
     //references
     const elementRef = useRef(null)
     const expandedElRef = useRef(null)
@@ -43,13 +44,14 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ key, textColor, imgInfo, de
     const transitionTime = .5
 
     //size (structural) variables
-    const bgWidth = isBigScreen ? 800 : isMediumScreen ? 700 : 500
-    const bgHeight = isBigScreen ? 700 : isMediumScreen ? 700 : 500
+    const bgWidth = isBigScreen ? 700 : isMediumScreen ? 500 : 300
+    const bgHeight = isBigScreen ? 700 : isMediumScreen ? 500 : 300
+    const spacing = isBigScreen ? 500 : isMediumScreen ? 200 : 200
+
 
     const innerPadding = isBigScreen || isMediumScreen ? '0px 25px' : '0px 15px'
     const outsideOffset = 30
     const border = `1px solid ${textColor}`
-    const spacing = isBigScreen ? 150 : isMediumScreen ? 100 : 80
 
     const [transform, setTransform] = useState(``)
 
@@ -111,6 +113,7 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ key, textColor, imgInfo, de
 
     return (
         <div
+            id={id}
             style={{
                 display: 'flex',
                 flexDirection: 'row',
@@ -118,7 +121,8 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ key, textColor, imgInfo, de
                 justifyContent: 'center',
                 alignItems: 'center',
                 height: '100vh',
-                backgroundColor: bgColor, //main background area
+                minWidth: '100vw',
+                backgroundColor: 'inherit', //main background area
             }}
         >
             <div
@@ -141,6 +145,7 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ key, textColor, imgInfo, de
                 {/** Background */}
                 <div
                     style={{
+                        position: 'relative',
                         zIndex: 2,
                         width: bgWidth,
                         height: bgHeight,
@@ -150,8 +155,75 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ key, textColor, imgInfo, de
                         flexDirection: 'row',
                         transition: `all ${transitionTime}s`,
                         backgroundColor: `${descBgColor}`, //structural square's (background square's??) background 
+                        justifyContent: 'center',
+                        alignItems: 'center',
                     }}
                 >
+                    {/** The Close button */}
+                    <div
+                        id='close'
+                        style={{
+                            zIndex: 20,
+                            width: '100px',
+                            height: '100px',
+                            position: 'absolute',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <div
+                            onClick={async () => {
+                                if (expandedElement) setPrevElement({
+                                    id: expandedElement,
+                                })
+                                setExpandedElement('close')
+                                await setTimeout(() => setContentTransition(!contentTransition), transitionTime * 100)
+                            }}
+                            onMouseEnter={async () => {
+                                setOpenButtonIsHovered(true)
+                                setContentTransition(true)
+                            }}
+                            onMouseLeave={async () => {
+                                setOpenButtonIsHovered(false)
+                            }}
+                            style={{
+                                width: openButtonIsHovered || contentTransition ? '40px' : '100px',
+                                height: openButtonIsHovered || contentTransition ? '40px' : '100px',
+                                border: border,
+                                // borderRadius: openButtonIsHovered ? '100%' : 0,
+                                borderRadius: '100%',
+                                transition: `all ${transitionTime}s`,
+                                transform: openButtonIsHovered || contentTransition ? 'rotate(45deg) translateX(-60px) translateY(55px)' : '',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: openButtonIsHovered ? highlightBgColor : 'inherit',
+                                boxShadow: openButtonIsHovered ? shadow : undefined,
+                            }}
+                        >
+                            
+                                <CloseSharp
+                                    style={{
+                                        width: openButtonIsHovered || contentTransition ? '20px' : 0,
+                                        height: '20px',
+                                        transition: `all ${transitionTime}s`,
+                                        transform: openButtonIsHovered || contentTransition ? 'rotate(-45deg)' : 'rotate(0deg)',
+                                    }}
+                                />
+
+                                {/* <ArrowOutward
+                                    style={{
+                                        width: openButtonIsHovered || contentTransition ? '20px' : 0,
+                                        height: '20px',
+                                        transition: `all ${transitionTime}s`,
+                                        transform: openButtonIsHovered || contentTransition ? 'rotate(-45deg)' : 'rotate(0deg)',
+                                    }}
+                                /> */}
+                            
+
+                        </div>
+                    </div>
                     {/** Column 1 - left */}
                     <div
                         style={{
@@ -229,13 +301,11 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ key, textColor, imgInfo, de
                                 transform: (expandedElement == `tools${key}`) ? transform : ``,
                                 display: 'flex',
                                 justifyContent: 'center',
-                                alignItems:'center',
+                                alignItems: 'center',
                             }}
                         >
                             <span
                                 style={{
-                                    // position: 'absolute',
-                                    // bottom: 100,
                                     transition: `all ${transitionTime}s`,
                                 }}
                             >
@@ -283,7 +353,7 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ key, textColor, imgInfo, de
                                 transformOrigin: "center",  // Ensure correct transform origin
                                 display: 'flex',
                                 justifyContent: 'center',
-                                alignItems:'center'
+                                alignItems: 'center'
                             }}
                         >
                             <span
@@ -321,6 +391,8 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ key, textColor, imgInfo, de
                                 borderRadius: (expandedElement !== `tag${key}`) && contentTransition ? '128px 64px' : 0,
                                 border: contentTransition ? border : 0,
                                 display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
                                 overflow: 'hidden',
                                 transition: `all ${transitionTime}s`,
                                 transform: (expandedElement == `tag${key}`) ? transform : ``,
@@ -329,9 +401,8 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ key, textColor, imgInfo, de
                             <span
                                 style={{
                                     position: "absolute",
-                                    top: (expandedElement == `tag${key}`) ? 20 : '40%',
-                                    right: (expandedElement == `tag${key}`) ? 20 : '20%',
-                                    transition: `all ${transitionTime/2}s`,
+
+                                    transition: `all ${transitionTime / 2}s`,
                                 }}
                             >
                                 {tagInfo}
@@ -339,60 +410,7 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ key, textColor, imgInfo, de
                         </div>
                     </div>
                 </div>
-                <div
-                    id='close'
-                    style={{
-                        zIndex: 2,
-                        width: '100px',
-                        height: '100px',
-                        position: 'absolute',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}
-                >
-                    <div
-                        onClick={async () => {
-                            if (expandedElement) setPrevElement({
-                                id: expandedElement,
-                            })
-                            setExpandedElement('close')
-                            setOpenButtonIsHovered(!openButtonIsHovered)
-                            await setTimeout(() => setContentTransition(!contentTransition), transitionTime * 100)
-                        }}
-                        onMouseEnter={async () => {
-                            setOpenButtonIsHovered(true)
-                            await setTimeout(() => setContentTransition(true), transitionTime * 100)
-                        }}
-                        onMouseLeave={async () => {
-                            setOpenButtonIsHovered(false)
-                            // await setTimeout(() => setContentTransition(false), transitionTime * 100)
-                        }}
-                        style={{
-                            width: openButtonIsHovered || contentTransition ? '40px' : '100px',
-                            height: openButtonIsHovered || contentTransition ? '40px' : '100px',
-                            border: border,
-                            // borderRadius: openButtonIsHovered ? '100%' : 0,
-                            borderRadius: '100%',
-                            transition: `all ${transitionTime}s`,
-                            transform: openButtonIsHovered || contentTransition ? 'rotate(45deg) translateX(-60px) translateY(55px)' : '',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: openButtonIsHovered && contentTransition ? highlightBgColor : 'inherit',
-                            boxShadow: openButtonIsHovered ? shadow : undefined,
-                        }}
-                    >
-                        <CloseSharp
-                            style={{
-                                width: openButtonIsHovered || contentTransition ? '30px' : 0,
-                                height: '20px',
-                                transition: `all ${transitionTime}s`,
-                                transform: openButtonIsHovered || contentTransition ? 'rotate(-45deg)' : 'rotate(0deg)',
-                            }}
-                        />
-                    </div>
-                </div>
+
             </div >
             <div
                 ref={expandedElRef}

@@ -1,6 +1,6 @@
 import Typed from 'typed.js'
 import { useEffect, useRef, useState } from "react"
-import AnimatedBalls from '../animations/Components/AnimatedBalls'
+import { CursorCircle } from '../components'
 
 type IntroAreaProps = {
     accentColor?: string
@@ -18,13 +18,16 @@ const IntroArea: React.FC<IntroAreaProps> = ({ accentColor = 'blue', bgColor, te
     const [update, setUpdate] = useState(false)
     const [infoIsHovered, setInfoIsHovered] = useState(false)
 
-    const introFontSize = isMediumScreen ? isBigScreen ? '65px' : '50px' : '40px'
-    const langFontSize = isMediumScreen ? isBigScreen ? '15px' : '12px' : '12px'
+    const introFontSize = isMediumScreen ? isBigScreen ? 65 : 50 : 40
+    const langFontSize = isMediumScreen ? isBigScreen ? 15 : 12 : 10
+    const textOpacity = isBigScreen || isMediumScreen ? infoIsHovered ? 1 : .1 : 1
 
-    const leftOffset = '20%'
-    const divVertOffset =  isMediumScreen ? isBigScreen ? '50%' : '45%' : '42%'
-    const divWidth = isMediumScreen ? isBigScreen ? 350 : 275 : 175
-    const langVertOffset =  isMediumScreen ? isBigScreen ? '51%' : '46%' : '43%'
+    const leftOffset = 20
+    const minIntroHeight = introFontSize * 3
+    const divBorder = infoIsHovered ? `1px dashed ${textColor}` : `1px solid ${textColor}`
+    const divWidth = isMediumScreen ? isBigScreen ? 350 : 275 : 200
+    const spacingTop = 0
+    const spacingIn = 5
 
     const introPositioning = 'fixed'
 
@@ -70,7 +73,7 @@ const IntroArea: React.FC<IntroAreaProps> = ({ accentColor = 'blue', bgColor, te
                 onBegin: (() => setCurrentStringIndex(0)),
                 onReset: (() => setCurrentStringIndex(0)),
                 onDestroy: (() => setCurrentStringIndex(0)),
-                onComplete:(() => setCurrentStringIndex(0)),
+                onComplete: (() => setCurrentStringIndex(0)),
             })
 
             // Setup a MutationObserver to watch text changes
@@ -103,30 +106,29 @@ const IntroArea: React.FC<IntroAreaProps> = ({ accentColor = 'blue', bgColor, te
                 overflow: 'auto',
                 zIndex: 1,
                 backgroundColor: bgColor,
-                transition:'all .3s'
+                transition: 'all .3s'
             }}
         >
             <div
                 onMouseEnter={() => setInfoIsHovered(true)}
                 onMouseLeave={() => setInfoIsHovered(false)}
                 style={{
-                    backgroundColor:'white',
+                    position: introPositioning,
+                    top: '30%',
+                    left: `${leftOffset}%`,
                     transition: 'all .3s',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: spacingTop,
                 }}
             >
                 <span
-                    onMouseEnter={() => setInfoIsHovered(true)}
-                    onMouseLeave={async () => {
-                        await setTimeout(() => setInfoIsHovered(false), 200)
-                    }}
                     id="langText"
                     ref={el1}
                     style={{
-                        position: introPositioning,
-                        top: '30%',
-                        left: leftOffset,
+                        minHeight: minIntroHeight,
                         color: textColor,
-                        fontSize: introFontSize,
+                        fontSize: `${introFontSize}px`,
                         fontWeight: 300,
                         fontFamily: "Nanum Gothic Coding",
                     }}
@@ -134,29 +136,32 @@ const IntroArea: React.FC<IntroAreaProps> = ({ accentColor = 'blue', bgColor, te
                 {/** TODO: make this divider way cooler (wavy maybe?) */}
                 <div
                     style={{
-                        position: introPositioning,
-                        top: divVertOffset,
-                        left: leftOffset,
-                        width: divWidth,
-                        borderTop: infoIsHovered ? `1px dashed ${textColor}` : `1px solid ${textColor}`,
-                        opacity: isBigScreen ? infoIsHovered ? 1 : .5 : 1,
-                    }}
-                />
-                <span
-                    ref={el2}
-                    style={{
-                        position: introPositioning,
-                        top: langVertOffset,
-                        left: leftOffset,
-                        color: textColor,
-                        fontSize: langFontSize,
-                        fontWeight: 350,
-                        fontFamily: "Nanum Gothic Coding",
-                        opacity: isBigScreen ? infoIsHovered ? 1 : .5 : 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: spacingIn,
                     }}
                 >
-                    {languages[currentStringIndex]} 
-                </span>
+                    {<div
+                        style={{
+                            width: divWidth,
+                            borderTop: divBorder,
+                            opacity: textOpacity,
+                        }}
+                    /> }
+                    <span
+                        ref={el2}
+                        style={{
+                            color: textColor,
+                            fontSize: `${langFontSize}px`,
+                            fontWeight: 350,
+                            fontFamily: "Nanum Gothic Coding",
+                            opacity: textOpacity,
+                        }}
+                    >
+                        {languages[currentStringIndex]}
+                    </span>
+                </div>
+
             </div>
 
 
