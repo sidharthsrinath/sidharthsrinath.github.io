@@ -57,7 +57,7 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ id, key, textColor, imgInfo
 
     //typography attributes
     const font = "Ruda, sans-serif"
-    const defaultBgColor = 'transparent'
+    // const defaultBgColor = 'transparent'
     const highlightBgColor = '#FDFFF0'
     // const shadowColor = '#363636'
     // const shadow = `3px 3px 2px ${shadowColor}`
@@ -66,8 +66,12 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ id, key, textColor, imgInfo
     // Adjusted shadow settings
     const shadow = `1px 1px 4px ${shadowColor}`; // Reduced offset, increased blur, and lighter color
 
-    const bgOpacity = '90'
+    const bgOpacity = '40'
     const descBgColor = '#FBFBFB' + bgOpacity
+    const defaultBgColor = textColor + bgOpacity
+    // const descBgColor = textColor
+
+    const innerBgColor = textColor + bgOpacity
 
     //Tag Element specific
     const tagFontSize = 15
@@ -198,7 +202,9 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ id, key, textColor, imgInfo
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
-                                backgroundColor: openButtonIsHovered ? highlightBgColor : 'inherit',
+                                backgroundColor: openButtonIsHovered ? defaultBgColor : 'inherit',
+                                WebkitBackdropFilter: 'blur(10px)',
+                                backdropFilter: 'blur(10px)',
                                 boxShadow: openButtonIsHovered ? shadow : undefined,
                             }}
                         >
@@ -211,17 +217,6 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ id, key, textColor, imgInfo
                                         transform: openButtonIsHovered || contentTransition ? 'rotate(-45deg)' : 'rotate(0deg)',
                                     }}
                                 />
-
-                                {/* <ArrowOutward
-                                    style={{
-                                        width: openButtonIsHovered || contentTransition ? '20px' : 0,
-                                        height: '20px',
-                                        transition: `all ${transitionTime}s`,
-                                        transform: openButtonIsHovered || contentTransition ? 'rotate(-45deg)' : 'rotate(0deg)',
-                                    }}
-                                /> */}
-                            
-
                         </div>
                     </div>
                     {/** Column 1 - left */}
@@ -288,6 +283,8 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ id, key, textColor, imgInfo
                             onMouseLeave={() => setToolsIsHovered(false)}
                             style={{
                                 backgroundColor: toolsIsHovered ? highlightBgColor : defaultBgColor,
+                                WebkitBackdropFilter: 'blur(10px)',
+                                backdropFilter: 'blur(10px)',
                                 boxShadow: toolsIsHovered ? shadow : 'none',
                                 // position: contentTransition ? 'absolute' : 'relative',
                                 position: 'absolute',

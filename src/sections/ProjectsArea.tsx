@@ -2,16 +2,6 @@ import { useEffect, useState } from "react";
 import ProjectEntry from "../components/ProjectEntry"
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 
-const randomizeHexString = (hexString: string): string => {
-    // Extract all but the last two digits
-    const mainPart = hexString.slice(0, -1)
-    // Generate a random hex value for the last two digits
-    const randomLastTwo = Math.floor(Math.random() * 256).toString(16).padStart(1, "0")
-    // Combine the main part with the randomized last two digits
-    const randomizedHexString = mainPart + randomLastTwo
-    return randomizedHexString
-}
-
 type ScrollButtonProps = {
     color?: string
     maxLoc: number
@@ -19,38 +9,34 @@ type ScrollButtonProps = {
     currLoc: number
     setNewLoc: (arg0: number) => void
     layer: number
+    sticky?: boolean
 }
 
-const ScrollButton: React.FC<ScrollButtonProps> = ({ color = 'inherit', direction, currLoc, maxLoc, setNewLoc, layer}) => {
+const ScrollButton: React.FC<ScrollButtonProps> = ({ color = 'inherit', direction, currLoc, maxLoc, setNewLoc, layer, sticky = false }) => {
     const isInactive = (direction === 'left') ? (currLoc === 0) : (currLoc === maxLoc)
     const [isHovered, setIsHovered] = useState(false)
 
     const buttonCSS = {
-        zIndex: 11,
+        zIndex: layer + 1,
         position: 'absolute',
-        top: '50%',
-        left: (direction === 'left') ? 50 : undefined,
-        right: (direction === 'right') ? 50 : undefined,
+        top: '80%',
+        left: (direction === 'left') ? '40%' : undefined,
+        right: (direction === 'right') ? '40%' : undefined,
     } as React.CSSProperties
     const iconCSS = {
-        opacity: isInactive ? .3 : 1,
+        opacity: sticky ? 0 : isInactive ? .3 : 1,
         cursor: isInactive ? 'auto' : 'pointer',
         color,
         width: '40px',
         height: '40px',
+        transition: 'all .5s',
     } as React.CSSProperties
 
     return (
         <div
             onClick={() => {
-                if (!isInactive) {
-                    const n = (direction === 'left') ? Math.max(0, currLoc - 1) : Math.min(maxLoc, currLoc + 1)
-                    const newEl = `project${n}${layer ? `-${layer}` : ''}`
-                    console.log(newEl)
-                    const el = document.getElementById(newEl)
-                    el?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
-                    setNewLoc(n)
-                }
+                const n = (direction === 'left') ? Math.max(0, currLoc - 1) : Math.min(maxLoc, currLoc + 1)
+                setNewLoc(n)
             }}
             style={buttonCSS}
         >
@@ -71,44 +57,82 @@ type ProjectAreaProps = {
     layer: number
 }
 
-const ProjectArea: React.FC<ProjectAreaProps> = ({ isBigScreen, isMediumScreen, textColor, bgColor, titleBgColor, layer}) => {
+const ProjectArea: React.FC<ProjectAreaProps> = ({ isBigScreen, isMediumScreen, textColor, bgColor, titleBgColor, layer }) => {
     const titleFontSize = isMediumScreen ? isBigScreen ? '60px' : '40px' : '40px'
-    const titleMinHeight = isMediumScreen || isBigScreen ? '100px' : '70px'
+    const titleMinHeight = isMediumScreen || isBigScreen ? titleFontSize : titleFontSize
+    const [prevEl, setPrevEl] = useState<number>(0)
     const [currEl, setCurrEl] = useState<number>(0)
     const numEls = 8
     const [position, setPosition] = useState<'fixed' | 'relative'>('relative')
+    const thresh = 5
+    const top = 0
+    
+    useEffect(() => {
+        setPrevEl(currEl)
+        /** Sticky Effect for the page */
+        const handleScroll = () => {
+            const currTop = window.scrollY
+            if (layer === 2) console.log(currTop, (layer) * window.innerHeight)
+            setPosition(currTop > (layer - 1) * window.innerHeight + thresh ? 'fixed' : 'relative')
+        }
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
+
+    useEffect(() => {
+        if (prevEl !== currEl) {
+            const el = document.getElementById(`project${currEl}${layer ? `-${layer}` : ''}`)
+            el?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+            setPrevEl(currEl)
+        }
+    }, [currEl])
 
     return (
-
+        <div
+            style={{
+                position: 'relative',
+                width: '100vw',
+                height: '100vh',
+                overflow: 'hidden',
+                backgroundColor:titleBgColor,
+            }}
+        >
             <div
                 id="top"
                 style={{
                     position,
-                    minHeight: '100vh',
+                    top,
+                    minHeight: '100%',
                     zIndex: 2,
-                    backgroundColor: bgColor
+                    backgroundColor: bgColor,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    transition: 'all 1s',
                 }}
             >
-                <ScrollButton direction="left" currLoc={currEl} setNewLoc={setCurrEl} maxLoc={numEls - 1} color={textColor} layer={layer}/>
-                <ScrollButton direction="right" currLoc={currEl} setNewLoc={setCurrEl} maxLoc={numEls - 1} color={textColor} layer={layer}/>
-
                 <div
                     style={{
-                        zIndex: layer,
-                        top: 0,
-                        position: 'absolute',
-                        color: textColor,
-                        fontSize: titleFontSize,
-                        fontWeight: 300,
-                        fontFamily: "Nanum Gothic Coding",
-                        backgroundColor: titleBgColor,
-                        // minHeight: titleMinHeight,
-                        display: 'flex',
-                        alignItems: 'center',
+                        position: 'relative',
                     }}
                 >
-                    Projects
+                    <div
+                        style={{
+                            zIndex: layer,
+                            top: 0,
+                            position: 'absolute',
+                            color: textColor,
+                            fontSize: titleFontSize,
+                            fontWeight: 300,
+                            fontFamily: "Nanum Gothic Coding",
+                            backgroundColor: titleBgColor,
+                            display: 'flex',
+                            alignItems: 'center',
+                        }}
+                    >
+                        Projects
+                    </div>
                 </div>
+
                 <div
                     style={{
                         zIndex: 2,
@@ -133,7 +157,9 @@ const ProjectArea: React.FC<ProjectAreaProps> = ({ isBigScreen, isMediumScreen, 
                         />)
                     })}
                 </div>
-
+            </div>
+            <ScrollButton direction="left" currLoc={currEl} setNewLoc={setCurrEl} maxLoc={numEls - 1} color={textColor} layer={layer} sticky={position === 'fixed'} />
+            <ScrollButton direction="right" currLoc={currEl} setNewLoc={setCurrEl} maxLoc={numEls - 1} color={textColor} layer={layer} sticky={position === 'fixed'} />
         </div>
     )
 }

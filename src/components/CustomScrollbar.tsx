@@ -28,6 +28,7 @@ const SinglePageScroll: React.FC<SinglePageScrollProps> = ({ containerColor, scr
     const innerVertOffset = full ? 0 : isActive ? `${Math.min(0, progress - 100)}%` : isHovered ? 0 : -100
     const innerBarHeight = 100
     const innerBarTransition = isActive && !full ? `` : `all ${1.5 * transitionTime}s`
+    const innerBarBorder = `2px solid ${scrollColor}`
 
     useEffect(() => {
         const scrollHandler = () => {
@@ -89,6 +90,7 @@ const SinglePageScroll: React.FC<SinglePageScrollProps> = ({ containerColor, scr
                     height: `${innerBarHeight}%`,
                     top: innerVertOffset,
                     backgroundColor: scrollColor,
+                    border:innerBarBorder,
                     borderRadius,
                     display: 'flex',
                     flexDirection: 'column',

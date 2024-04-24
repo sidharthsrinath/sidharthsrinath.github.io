@@ -18,18 +18,28 @@ type MenuProps = {
 
 const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, darkMode, setDarkMode }) => {
 
-    const transitionTime = 0.8
-    const fontSize = isSmall ? 30 : 15
-    const menuY = isSmall ? 15 : 20
-    const spacingX = isSmall ? 10 : 7
-    const opacity = 95
-    const bgColor = darkMode ? `#B70404${opacity}` : `#FBFBFB${opacity}`
-    // const bgColor = 'transparent'
-    const textColor = darkMode ? "#FEF2F4"  : '#F31559'
-
+    //state settings - general
     const [hidden, setHidden] = useState<boolean>(false)
     const [menuActive, setMenuActive] = useState<boolean>(false)
     const [activate, setActivate] = useState<boolean>(false)
+
+    //style settings - animations + positioning
+    const transitionTime = 0.8
+    const fontSize = isSmall ? 30 : 15
+    const menuY = isSmall ? 10 : 20
+    const menuTop = hidden ? -100 : menuY - 10
+
+    const spacingX = isSmall ? 10 : 7
+    const menuLeft = hidden ? -100 : 20
+
+
+    // style settings - general
+    const opacity = ''
+    // const bgColor = darkMode ? `#B70404${opacity}` : `#FBFBFB${opacity}`
+    const bgColor = 'transparent'
+    const bgBlur = 'blur(10px)'
+    const textColor = darkMode ? "#FEF2F4" : '#F31559'
+
 
     window.addEventListener("wheel", (e: WheelEvent) => {
         //going down
@@ -118,8 +128,8 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, darkMode
             <div
                 id="menubtn"
                 style={{
-                    left: hidden ? -100 : 20,
-                    top: hidden ? -100 : menuY - 10,
+                    left: menuLeft,
+                    top: menuTop,
                     margin: `${spacingX}px`,
                     position: 'fixed',
                     zIndex: 100000,
@@ -134,9 +144,11 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, darkMode
                     className="menubtn"
                     style={{
                         borderRadius: '30px',
-                        border : `1px solid ${textColor}`,
-                        backgroundColor:bgColor,
+                        border: `1px solid ${textColor}`,
+                        backgroundColor: bgColor,
                         color: textColor,
+                        WebkitBackdropFilter: bgBlur,
+                        backdropFilter: bgBlur,
                     }}
                 >
                     <DensityLarge
@@ -169,7 +181,7 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, darkMode
                         zIndex: 100000,
                         transition: `all ${transitionTime}s`,
                         opacity: 1,
-                        overflowX:'hidden',
+                        overflowX: 'hidden',
                     }}>
                     <Button
                         onClick={() => { setDarkMode(!darkMode) }}
@@ -177,11 +189,13 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, darkMode
                             borderRadius: '30px',
                             overflowX: 'hidden',
                             minWidth: `${2 * fontSize}px`,
-                            justifyItems:'center',
-                            alignItems:'center',
-                            color:textColor,
-                            border : `1px solid ${textColor}`,
-                            backgroundColor:bgColor,
+                            justifyItems: 'center',
+                            alignItems: 'center',
+                            color: textColor,
+                            border: `1px solid ${textColor}`,
+                            backgroundColor: bgColor,
+                            WebkitBackdropFilter: bgBlur,
+                            backdropFilter: bgBlur,
                         }}
                     >
 
@@ -190,8 +204,8 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, darkMode
                                 position: 'absolute',
                                 minWidth: `${fontSize}px`,
                                 maxWidth: `${fontSize}px`,
-                                transform : darkMode ? 'translateX(0px)' : 'translateX(-100px)',
-                                transition:'all .3s'
+                                transform: darkMode ? 'translateX(0px)' : 'translateX(-100px)',
+                                transition: 'all .3s'
                             }}
                         />
                         <WbSunny
@@ -199,8 +213,8 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, darkMode
                                 position: 'absolute',
                                 minWidth: `${fontSize}px`,
                                 maxWidth: `${fontSize}px`,
-                                transform : darkMode ? 'translateX(100px)' : 'translateX(0px)',
-                                transition:'all .3s'
+                                transform: darkMode ? 'translateX(100px)' : 'translateX(0px)',
+                                transition: 'all .3s'
                             }}
                         />
 
@@ -214,7 +228,7 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, darkMode
                         zIndex: 100000,
                         transition: `all ${transitionTime}s`,
                         opacity: 1,
-                        
+
                     }}>
                     <Button
                         onClick={() => {
@@ -222,9 +236,11 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, darkMode
                         }}
                         style={{
                             borderRadius: '30px',
-                            color:textColor,
-                            border : `1px solid ${textColor}`,
-                            backgroundColor:bgColor,
+                            color: textColor,
+                            border: `1px solid ${textColor}`,
+                            backgroundColor: bgColor,
+                            WebkitBackdropFilter: bgBlur,
+                            backdropFilter: bgBlur,
                         }}
                     >
                         <FaRegPaperPlane
@@ -248,9 +264,11 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, darkMode
                         onClick={() => window.open(require('../assets/Sidharth_Srinath_2024.pdf'), '_blank')}
                         style={{
                             borderRadius: '30px',
-                            color:textColor,
-                            border : `1px solid ${textColor}`,
-                            backgroundColor:bgColor,
+                            color: textColor,
+                            border: `1px solid ${textColor}`,
+                            backgroundColor: bgColor,
+                            WebkitBackdropFilter: bgBlur,
+                            backdropFilter: bgBlur,
                         }}
                     >
                         <Resume2
@@ -277,9 +295,11 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, darkMode
                         }}
                         style={{
                             borderRadius: '30px',
-                            color:textColor,
-                            border : `1px solid ${textColor}`,
-                            backgroundColor:bgColor,
+                            color: textColor,
+                            border: `1px solid ${textColor}`,
+                            backgroundColor: bgColor,
+                            WebkitBackdropFilter: bgBlur,
+                            backdropFilter: bgBlur,
                         }}
                     >
                         <GitHub
@@ -305,9 +325,11 @@ const MenuLite: React.FC<MenuProps> = ({ isSmall, currPage, pageSetter, darkMode
                         }}
                         style={{
                             borderRadius: '30px',
-                            color:textColor,
-                            border : `1px solid ${textColor}`,
-                            backgroundColor:bgColor,
+                            color: textColor,
+                            border: `1px solid ${textColor}`,
+                            backgroundColor: bgColor,
+                            WebkitBackdropFilter: bgBlur,
+                            backdropFilter: bgBlur,
                         }}
                     >
                         {

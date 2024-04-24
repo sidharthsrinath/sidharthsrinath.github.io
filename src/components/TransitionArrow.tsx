@@ -4,9 +4,10 @@ import FlipOverAnimation from "../animations/Components/FlipOver";
 
 type InputProps = {
     arrowColor:string
+    backgroundColor?:string
 }
 
-const Arrow: React.FC<InputProps> = ({ arrowColor}) => {
+const Arrow: React.FC<InputProps> = ({ arrowColor, backgroundColor='inherit'}) => {
     const [atBottom, setAtBottom] = useState(false)
     const transitionTime = .5 
 
@@ -46,12 +47,14 @@ const Arrow: React.FC<InputProps> = ({ arrowColor}) => {
             style={{
                 left: 0,
                 right:0,
-                bottom: 10,
+                bottom: 0,
                 textAlign: "center",
                 position: "fixed",
                 zIndex: 100000,
                 transition: `bottom ${transitionTime}s`,
                 opacity: 1,
+                WebkitBackdropFilter: 'blur(1px)',
+                backdropFilter: 'blur(1px)',
                 // mixBlendMode:'difference'
             }}
         >

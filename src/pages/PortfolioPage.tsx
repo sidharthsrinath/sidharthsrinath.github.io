@@ -26,7 +26,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ isDarkMode, isBigS
     const textColorMain = isDarkMode ? "#FEF2F4" : '#F31559'
 
     const bgColorSecondary = isDarkMode ? '#B70404' : '#FFFFFF'
-    const textColorSecondary = isDarkMode ? '#378CE7' : "#C21292"
+    const textColorSecondary = isDarkMode ? '#FDFF00' : "#C21292"
 
     const highlightColor = isDarkMode ? "#FEF2F4" : '#F31559'
     const highlightTextColor = isDarkMode ? '#B70404' : '#FBFBFB'
@@ -41,7 +41,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ isDarkMode, isBigS
                 position: 'relative', // Positioned relatively to restrict cursor circle
                 // overflowX: 'hidden', // meant for cursor circle to npt create extra space - taken out cuz no more cursor circle + dynamic
                 // width: '100%',
-                // overflowY: 'auto',
+                // overflowY: 'hidden',
                 // scrollbarWidth: 'none',
             }}
         >
