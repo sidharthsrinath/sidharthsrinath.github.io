@@ -107,9 +107,10 @@ const SinglePageScroll: React.FC<SinglePageScrollProps> = ({ containerColor, scr
 type CustomScrollBarProps = {
     pageColors: string[]
     colors: string[]
+    showLastPage?: boolean
 }
 
-const CustomScrollbar: React.FC<CustomScrollBarProps> = ({ colors, pageColors }) => {
+const CustomScrollbar: React.FC<CustomScrollBarProps> = ({ colors, pageColors, showLastPage=false }) => {
     const [pageNum, setPageNum] = useState<number>(0)
     const [numPages, setNumPages] = useState<number>(-1)
     //container style
@@ -121,7 +122,7 @@ const CustomScrollbar: React.FC<CustomScrollBarProps> = ({ colors, pageColors })
     useEffect(() => {
         // const maxHeight = Math.max( document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight )
         const maxHeight = document.body.scrollHeight
-        const n = Math.floor(maxHeight / window.innerHeight) - (maxHeight % window.innerHeight === 0 ? 1 : 0)
+        const n = Math.floor(maxHeight / window.innerHeight) - (showLastPage ? 0: 1) * (maxHeight % window.innerHeight === 0 ? 1 : 0)
         setNumPages(n)
 
         const scrollHandler = () => {
@@ -150,6 +151,7 @@ const CustomScrollbar: React.FC<CustomScrollBarProps> = ({ colors, pageColors })
             {numPages > 0 &&
                 Array.from({ length: numPages }).map((_, i) => (
                     <SinglePageScroll
+                        key={i}
                         containerColor={colors[i]}
                         scrollColor={pageColors[i]}
                         isActive={pageNum === i}

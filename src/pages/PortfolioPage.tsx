@@ -14,6 +14,7 @@ import TransitionArrow from '../components/TransitionArrow'
 import CustomCarousel from '../components/ContentCarousel'
 import ProjectArea from '../sections/ProjectsArea'
 import CustomScrollbar from '../components/CustomScrollbar'
+import TechnicalProficienciesArea from '../sections/TechnicalProficienciesArea'
 
 
 type PortfolioPageProps = {
@@ -54,17 +55,19 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ isDarkMode, isBigS
                 } as React.CSSProperties}
             >
                 {/** FIXED POSITION: Custom Scrollbar */}
-                <CustomScrollbar colors={[bgColorMain, bgColorSecondary,bgColorSecondary,bgColorSecondary]} pageColors={[textColorMain, textColorSecondary, textColorSecondary, textColorSecondary]} />
+                <CustomScrollbar key={0} colors={[bgColorMain, bgColorSecondary,bgColorSecondary,bgColorSecondary]} pageColors={[textColorMain, textColorSecondary, textColorSecondary, textColorSecondary]} showLastPage={true} />
                 {/** FIXED POSITION: Transitionary arrow */}
-                <TransitionArrow arrowColor={textColorMain} />
+                <TransitionArrow key={1} arrowColor={textColorMain} />
 
                 {/** ITEM 1 */}
-                <IntroArea accentColor={textUnderlineColor} bgColor={bgColorMain} textColor={textColorMain} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen} />
+                <IntroArea key={2} accentColor={textUnderlineColor} bgColor={bgColorMain} textColor={textColorMain} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen} />
 
-                {/** ITEM 2-4 */}
-                <ProjectArea key={1} titleBgColor={titleBgColor} bgColor={bgColorSecondary} textColor={textColorSecondary} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen} layer={2}/>
-                <ProjectArea key={2} titleBgColor={titleBgColor} bgColor={bgColorSecondary} textColor={textColorSecondary} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen} layer={3}/>
-                <ProjectArea titleBgColor={titleBgColor} bgColor={bgColorSecondary} textColor={textColorSecondary} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen} layer={4}/>
+                {/** ITEM 2 */}
+                <TechnicalProficienciesArea key={3}/>
+
+                {/** ITEM 3 */}
+                <ProjectArea key={4} titleBgColor={titleBgColor} bgColor={bgColorSecondary} textColor={textColorSecondary} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen} layer={4}/>
+
 
 
             </div>

@@ -1,0 +1,201 @@
+{
+    "0": {
+        "name": "Machine Learning",
+        "contents": {
+            "Frameworks": [
+                "Tensorflow",
+                "Keras",
+                "PyTorch",
+                "Scikit-learn"
+            ],
+            "Libraries": [
+                "Numpy",
+                "Pandas",
+                "Matplotlib",
+                "Seaborn",
+                "Plotly",
+                "Scipy",
+                "Statsmodels"
+            ],
+            "Languages": [
+                "Python",
+                "C",
+                "C++",
+                "SQL"
+            ],
+            "Tools": [
+                "Jupyter",
+                "Run.ai",
+                "WandB (Weights and Biases)",
+                "Azure Custom Vision",
+                "PowerBI"
+            ],
+            "Experiences": [
+                "Sony Electronics",
+                "Salk Institute of Biological Studies",
+                "UCSD",
+                "MedSmart AI"
+            ],
+            "Tags": [
+                "Computer Vision",
+                "Time Series",
+                "Autoregressive Models",
+                "Deep Generative Models",
+                "Transformers",
+                "Clustering"
+            ]
+        }
+    },
+    "1": {
+        "name": "Data Science",
+        "contents": {
+            "Frameworks": [
+                "Tensorflow",
+                "Keras",
+                "PyTorch",
+                "Scikit-learn"
+            ],
+            "Libraries": [
+                "Numpy",
+                "Pandas",
+                "Matplotlib",
+                "Seaborn",
+                "Plotly",
+                "Scipy",
+                "Statsmodels"
+            ],
+            "Languages": [
+                "Python",
+                "R",
+                "JavaScript",
+                "TypeScript",
+                "SQL"
+            ],
+            "Tools": [
+                "Jupyter",
+                "Google Colab",
+                "Databricks",
+                "Tableau",
+                "PowerBI"
+            ],
+            "Experiences": [
+                "Sony Electronics",
+                "Salk Institute of Biological Studies",
+                "UCSD",
+                "MedSmart AI"
+            ],
+            "Tags": [
+                "Data Cleaning",
+                "Data Wrangling",
+                "Data Visualization",
+                "Statistical Analysis",
+                "Predictive Modeling",
+                "Machine Learning"
+            ]
+        }
+    },
+    "2": {
+        "name": "Backend",
+        "contents": {
+            "Frameworks": [
+                "Express.js",
+                "Django",
+                "Flask",
+                "OpenAPI",
+                "FastAPI",
+                "Azure Functions",
+                "AWS Lambda",
+                "Serverless.js",
+                "Docker",
+                "Kubernetes"
+            ],
+            "Languages": [
+                "JavaScript",
+                "Python",
+                "TypeScript",
+                "Java",
+                "SQL",
+                "NoSQL",
+                "GraphQL"
+            ],
+            "Libraries": [
+                "Node.js",
+                "Flask",
+                "Django",
+                "Spring Boot",
+                "Express.js"
+            ],
+            "Tools": [
+                "MongoDB",
+                "PostgreSQL",
+                "MySQL",
+                "SQLite",
+                "DynamoDB",
+                "CosmosDB"
+            ],
+            "Experiences": [
+                "Sony Electronics",
+                "MedSmart AI"
+            ],
+            "Tags": [
+                "RESTful APIs",
+                "GraphQL",
+                "Microservices",
+                "Serverless",
+                "Docker",
+                "Kubernetes"
+            ]
+        }
+    },
+    "3": {
+        "name": "Frontend",
+        "contents": {
+            "Frameworks": [
+                "React.js",
+                "Angular",
+                "Next.js",
+                "Electron"
+            ],
+            "Languages": [
+                "JavaScript",
+                "TypeScript",
+                "HTML",
+                "CSS",
+                "SASS"
+            ],
+            "Libraries": [
+                "React.js",
+                "Redux.js",
+                "Node.js",
+                "Next.js",
+                "Vite",
+                "TailwindCSS",
+                "Bootstrap",
+                "Material-UI",
+                "Chakra-UI"
+            ],
+            "Tools": [
+                "Webpack",
+                "Babel",
+                "ESLint",
+                "Prettier",
+                "Jest",
+                "Cypress",
+                "Storybook"
+            ],
+            "Experiences": [
+                "Sony Electronics",
+                "MedSmart AI"
+            ],
+            "Tags": [
+                "Responsive Design",
+                "Single Page Applications",
+                "Progressive Web Apps",
+                "Server Side Rendering",
+                "Static Site Generation",
+                "Serverless Web Apps",
+                "Material Design"
+            ]
+        }
+    }
+}

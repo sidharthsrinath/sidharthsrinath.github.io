@@ -15,7 +15,7 @@ export const App = () => {
     /**
      * Control Current Page Centrally
      */
-    const [currentPage, setCurrentPage] = useState<'portfolio' | 'about'>('portfolio')
+    const [currentPage, setCurrentPage] = useState<'portfolio' | 'about' | 'technical'>('portfolio')
 
     /**
      * Control Theme Mode Centrally
@@ -62,6 +62,7 @@ export const App = () => {
 
                 {/** About Me Page */}
                 {currentPage === 'about' && <AboutPage isMediumScreen={isMediumScreen} />}
+
         </ChakraProvider>
     );
 };

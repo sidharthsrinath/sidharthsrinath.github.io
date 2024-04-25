@@ -22,7 +22,8 @@ const IntroArea: React.FC<IntroAreaProps> = ({ accentColor = 'blue', bgColor, te
     const langFontSize = isMediumScreen ? isBigScreen ? 15 : 12 : 10
     const textOpacity = isBigScreen || isMediumScreen ? infoIsHovered ? 1 : .1 : 1
 
-    const leftOffset = 20
+    const [introTop, setIntroTop] = useState<number>(30)
+    const [introLeft, setIntroLeft] = useState<number>(20)
     const minIntroHeight = introFontSize * 3
     const divBorder = infoIsHovered ? `1px dashed ${textColor}` : `1px solid ${textColor}`
     const divWidth = isMediumScreen ? isBigScreen ? 350 : 275 : 200
@@ -60,6 +61,16 @@ const IntroArea: React.FC<IntroAreaProps> = ({ accentColor = 'blue', bgColor, te
     ]
 
     useEffect(() => {
+
+        const textEffect = () => {
+            // setIntroTop(30 - ((window.scrollY % window.innerHeight) / window.innerHeight) * 30)
+            // setIntroLeft(Math.max(0, 20 - ((window.scrollY % window.innerHeight) / window.innerHeight) * 20))
+        }
+
+        window.addEventListener('scroll', textEffect)
+
+
+
         let observer: MutationObserver;
 
         if (el1.current) {
@@ -94,6 +105,7 @@ const IntroArea: React.FC<IntroAreaProps> = ({ accentColor = 'blue', bgColor, te
             return () => {
                 typed1.destroy();
                 observer.disconnect() // Clean up the observer
+                window.removeEventListener('scroll', textEffect)
             }
         }
     }, []) //
@@ -104,9 +116,9 @@ const IntroArea: React.FC<IntroAreaProps> = ({ accentColor = 'blue', bgColor, te
                 height: '100vh',
                 position: 'relative',
                 overflow: 'auto',
-                zIndex: 1,
+                zIndex: 0,
                 backgroundColor: bgColor,
-                transition: 'all .3s'
+                // transition: 'all .3s'
             }}
         >
             <div
@@ -114,9 +126,9 @@ const IntroArea: React.FC<IntroAreaProps> = ({ accentColor = 'blue', bgColor, te
                 onMouseLeave={() => setInfoIsHovered(false)}
                 style={{
                     position: introPositioning,
-                    top: '30%',
-                    left: `${leftOffset}%`,
-                    transition: 'all .3s',
+                    top: `${introTop}%`,
+                    left: `${introLeft}%`,
+                    // transition: 'all .3s',
                     display: 'flex',
                     flexDirection: 'column',
                     gap: spacingTop,

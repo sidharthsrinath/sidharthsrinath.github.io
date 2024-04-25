@@ -147,6 +147,7 @@ const ProjectArea: React.FC<ProjectAreaProps> = ({ isBigScreen, isMediumScreen, 
                         return (<ProjectEntry
                             id={currId}
                             key={i}
+                            prop_key={i}
                             textColor={textColor}
                             descInfo={"Hello World Description"}
                             imgInfo={require('/Users/sidharthsrinath/Documents/portfolio/sansidpoonal/src/assets/example2.png')}

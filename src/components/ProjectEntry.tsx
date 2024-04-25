@@ -12,7 +12,7 @@ type Element = {
 
 type ProjectEntryProps = {
     id: string
-    key: number
+    prop_key: number
     isBigScreen: boolean
     isMediumScreen: boolean
     textColor: string
@@ -23,7 +23,7 @@ type ProjectEntryProps = {
     tagInfo: string
 }
 
-const ProjectEntry: React.FC<ProjectEntryProps> = ({ id, key, textColor, imgInfo, descInfo, toolsInfo, tagInfo, isBigScreen, isMediumScreen }) => {
+const ProjectEntry: React.FC<ProjectEntryProps> = ({ id, prop_key, textColor, imgInfo, descInfo, toolsInfo, tagInfo, isBigScreen, isMediumScreen }) => {
     //references
     const elementRef = useRef(null)
     const expandedElRef = useRef(null)
@@ -83,16 +83,16 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ id, key, textColor, imgInfo
     useEffect(() => {
 
         const shiftToExpand = (src: HTMLElement) => {
-            if (src.id == `img${key}`) {
+            if (src.id == `img${prop_key}`) {
                 setTransform(`translateX(${2 * outsideOffset + bgWidth + spacing}px) translateY(${1 * outsideOffset}px)`)
-            } else if (src.id == `tools${key}`) {
+            } else if (src.id == `tools${prop_key}`) {
                 setTransform(`translateX(${2 * outsideOffset + bgWidth + spacing}px) translateY(${-1 * outsideOffset}px)`)
             }
-            else if (src.id == `desc${key}`) {
+            else if (src.id == `desc${prop_key}`) {
                 setTransform(`translateX(${bgWidth + spacing}px) translateY(${1 * outsideOffset}px)`)
 
             }
-            else if (src.id == `tag${key}`) {
+            else if (src.id == `tag${prop_key}`) {
                 setTransform(`translateX(${bgWidth + spacing}px) translateY(${-1 * outsideOffset}px)`)
             }
 
@@ -233,7 +233,7 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ id, key, textColor, imgInfo
                     >
                         {/** Image - top left */}
                         <div
-                            id={`img${key}`}
+                            id={`img${prop_key}`}
                             onClick={() => {
                                 if (contentTransition) {
                                     if (expandedElement) {
@@ -241,8 +241,8 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ id, key, textColor, imgInfo
                                             id: expandedElement,
                                         })
                                     }
-                                    if (expandedElement == `img${key}`) setExpandedElement('')
-                                    else setExpandedElement(`img${key}`)
+                                    if (expandedElement == `img${prop_key}`) setExpandedElement('')
+                                    else setExpandedElement(`img${prop_key}`)
                                 }
                             }}
                             onMouseEnter={() => setImgIsHovered(true)}
@@ -252,31 +252,31 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ id, key, textColor, imgInfo
                                 backgroundSize: 'cover', // or 'contain' based on your requirement
                                 backgroundPosition: 'center',
                                 backgroundRepeat: 'no-repeat',
-                                filter: imgIsHovered || (expandedElement == `img${key}`) ? 'grayscale(0)' : 'grayscale(.8)',
+                                filter: imgIsHovered || (expandedElement == `img${prop_key}`) ? 'grayscale(0)' : 'grayscale(.8)',
                                 boxShadow: imgIsHovered ? shadow : 'none',
                                 // position: contentTransition ? 'absolute' : 'relative',
                                 position: 'absolute',
                                 top: contentTransition ? -outsideOffset : 0,
                                 left: contentTransition ? -outsideOffset : 0,
-                                width: (expandedElement == `img${key}`) ? bgWidth : '100%',
-                                height: (expandedElement == `img${key}`) ? bgHeight : '50%',
-                                borderRadius: (expandedElement !== `img${key}`) && contentTransition && !imgIsHovered ? '128px 64px' : 0,
+                                width: (expandedElement == `img${prop_key}`) ? bgWidth : '100%',
+                                height: (expandedElement == `img${prop_key}`) ? bgHeight : '50%',
+                                borderRadius: (expandedElement !== `img${prop_key}`) && contentTransition && !imgIsHovered ? '128px 64px' : 0,
                                 border: border,
-                                transform: (expandedElement == `img${key}`) ? transform : ``,
+                                transform: (expandedElement == `img${prop_key}`) ? transform : ``,
                                 transition: `all ${transitionTime}s`,
                             }}
                         >
                         </div>
                         {/** Tools - bottom left */}
                         <div
-                            id={`tools${key}`}
+                            id={`tools${prop_key}`}
                             onClick={() => {
                                 if (contentTransition) {
                                     if (expandedElement) setPrevElement({
                                         id: expandedElement,
                                     })
-                                    if (expandedElement == `tools${key}`) setExpandedElement('')
-                                    else setExpandedElement(`tools${key}`)
+                                    if (expandedElement == `tools${prop_key}`) setExpandedElement('')
+                                    else setExpandedElement(`tools${prop_key}`)
                                 }
                             }}
                             onMouseEnter={() => setToolsIsHovered(true)}
@@ -290,12 +290,12 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ id, key, textColor, imgInfo
                                 position: 'absolute',
                                 bottom: contentTransition ? -outsideOffset : 0,
                                 left: contentTransition ? -outsideOffset : 0,
-                                width: (expandedElement == `tools${key}`) ? bgWidth : '100%',
-                                height: (expandedElement == `tools${key}`) ? bgHeight : '50%',
-                                borderRadius: (expandedElement !== `tools${key}`) && contentTransition ? '128px 64px' : 0,
+                                width: (expandedElement == `tools${prop_key}`) ? bgWidth : '100%',
+                                height: (expandedElement == `tools${prop_key}`) ? bgHeight : '50%',
+                                borderRadius: (expandedElement !== `tools${prop_key}`) && contentTransition ? '128px 64px' : 0,
                                 border: border,
                                 transition: `all ${transitionTime}s`,
-                                transform: (expandedElement == `tools${key}`) ? transform : ``,
+                                transform: (expandedElement == `tools${prop_key}`) ? transform : ``,
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
@@ -322,14 +322,14 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ id, key, textColor, imgInfo
                     >
                         {/** Desc - entire column right when unactivated, top right when activated */}
                         <div
-                            id={`desc${key}`}
+                            id={`desc${prop_key}`}
                             onClick={() => {
                                 if (contentTransition) {
                                     if (expandedElement) setPrevElement({
                                         id: expandedElement,
                                     })
-                                    if (expandedElement == `desc${key}`) setExpandedElement('')
-                                    else setExpandedElement(`desc${key}`)
+                                    if (expandedElement == `desc${prop_key}`) setExpandedElement('')
+                                    else setExpandedElement(`desc${prop_key}`)
                                 }
                             }}
                             onMouseEnter={() => setDescIsHovered(true)}
@@ -341,12 +341,12 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ id, key, textColor, imgInfo
                                 position: 'absolute',
                                 top: contentTransition ? -outsideOffset : 0,
                                 right: contentTransition ? -outsideOffset : 0,
-                                width: (expandedElement == `desc${key}`) ? bgWidth : '100%',
-                                height: contentTransition ? (expandedElement == `desc${key}`) ? bgHeight : '80%' : '100%',
-                                borderRadius: (expandedElement !== `desc${key}`) && contentTransition ? '128px 64px' : 0,
+                                width: (expandedElement == `desc${prop_key}`) ? bgWidth : '100%',
+                                height: contentTransition ? (expandedElement == `desc${prop_key}`) ? bgHeight : '80%' : '100%',
+                                borderRadius: (expandedElement !== `desc${prop_key}`) && contentTransition ? '128px 64px' : 0,
                                 border: border,
                                 transition: `all ${transitionTime}s`,
-                                transform: (expandedElement == `desc${key}`) ? transform : ``,
+                                transform: (expandedElement == `desc${prop_key}`) ? transform : ``,
                                 transformOrigin: "center",  // Ensure correct transform origin
                                 display: 'flex',
                                 justifyContent: 'center',
@@ -365,14 +365,14 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ id, key, textColor, imgInfo
                         </div>
                         {/** Row 2 - hidden when unactivated, bottom right when activated */}
                         <div
-                            id={`tag${key}`}
+                            id={`tag${prop_key}`}
                             onClick={() => {
                                 if (contentTransition) {
                                     if (expandedElement) setPrevElement({
                                         id: expandedElement,
                                     })
-                                    if (expandedElement == `tag${key}`) setExpandedElement('')
-                                    else setExpandedElement(`tag${key}`)
+                                    if (expandedElement == `tag${prop_key}`) setExpandedElement('')
+                                    else setExpandedElement(`tag${prop_key}`)
                                 }
                             }}
                             onMouseEnter={() => setTagIsHovered(true)}
@@ -383,16 +383,16 @@ const ProjectEntry: React.FC<ProjectEntryProps> = ({ id, key, textColor, imgInfo
                                 position: 'absolute',
                                 bottom: contentTransition ? -outsideOffset : 0,
                                 right: contentTransition ? -outsideOffset : 0,
-                                width: (expandedElement == `tag${key}`) ? bgWidth : '100%',
-                                height: contentTransition ? (expandedElement == `tag${key}`) ? '100%' : '20%' : '0%',
-                                borderRadius: (expandedElement !== `tag${key}`) && contentTransition ? '128px 64px' : 0,
+                                width: (expandedElement == `tag${prop_key}`) ? bgWidth : '100%',
+                                height: contentTransition ? (expandedElement == `tag${prop_key}`) ? '100%' : '20%' : '0%',
+                                borderRadius: (expandedElement !== `tag${prop_key}`) && contentTransition ? '128px 64px' : 0,
                                 border: contentTransition ? border : 0,
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 overflow: 'hidden',
                                 transition: `all ${transitionTime}s`,
-                                transform: (expandedElement == `tag${key}`) ? transform : ``,
+                                transform: (expandedElement == `tag${prop_key}`) ? transform : ``,
                             }}
                         >
                             <span
