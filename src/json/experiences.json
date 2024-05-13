@@ -1,0 +1,22 @@
+{
+    "Sony Electronics": {
+        "description": "As a Software Engineering Intern, I designed and deployed over ten serverless TypeScript microservices with CRUD operations, utilizing Azure Functions and Cosmos DB for optimized cloud scalability. I also built stateful UIs using Redux Toolkit Slices and React-component-based UI frameworks, enabled cross-platform distribution via Electron.JS, and reduced API calls to Azure Blob Storage by optimizing Event Hub architecture.",
+        "image": "/Users/sidharthsrinath/Documents/portfolio/sansidpoonal/src/assets/sony.svg"
+    },
+    "Salk Institute for Biological Studies": {
+        "description": "As a Research Assistant, I expanded out-of-distribution generalization abilities of SLEAP models through improved training regiments on expanded datasets, improved existing UNet backbones, and implemented new architectures like Mask-RCNN/ConvNext to drive improvements in mAP and alignment of confidence scores. I also built proof-of-concept models with Vision Transformers and migrated core functionality from TensorFlow to PyTorch.",
+        "image": "/Users/sidharthsrinath/Documents/portfolio/sansidpoonal/src/assets/salk_institute.svg"
+    },
+    "Werfen North America": {
+        "description": "During my Software Engineering Internship, I optimized diagnostic assay test libraries, designed navigable and intuitive user interfaces in Qt6 with C++, and developed a library of remote procedure calls with Python and gRPC. My work supported continuous integration and deployment using tools like Gerrit, Docker, and Jenkins.",
+        "image": "/Users/sidharthsrinath/Documents/portfolio/sansidpoonal/src/assets/werfen.svg"
+    },
+    "MedSmart AI": {
+        "description": "As a Software Engineering Intern, I forecasted expected medication volumes using statistical and deep-learning techniques, constructed ETL pipelines in Python and GraphQL through AWS services, and enabled client pharmacies to cut costs by up to 30% on unused medications.",
+        "image": "/Users/sidharthsrinath/Documents/portfolio/sansidpoonal/src/assets/medsmart.svg"
+    },
+    "UCSD": {
+        "description": "I served as an Instructional Assistant for Computer Science courses, where I implemented and led weekly discussion sessions, served as head tutor for lab sessions, and developed educational content like assignments and exams.",
+        "image": "/Users/sidharthsrinath/Documents/portfolio/sansidpoonal/src/assets/ucsd.svg"
+    }
+}

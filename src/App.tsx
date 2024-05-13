@@ -9,7 +9,21 @@ import MenuLite from './components/MenuLite';
 import { PortfolioPage } from './pages/PortfolioPage';
 import AboutPage from './pages/AboutPage';
 import ChatBox from './components/ChatBox';
+import SimplePortfolio from './pages/SimplePortfolio';
 
+const useMediaQuery = (query) => {
+    const [matches, setMatches] = useState(window.matchMedia(query).matches);
+
+    useEffect(() => {
+        const media = window.matchMedia(query);
+        const listener = (e) => setMatches(e.matches);
+        media.addEventListener('change', listener);
+        
+        return () => media.removeEventListener('change', listener);
+    }, [query]);
+
+    return matches;
+}
 
 export const App = () => {
     /**
@@ -26,42 +40,28 @@ export const App = () => {
     /**
      * Control Media Query-Based Sizing: Big Screens
      */
-    const [isBigScreen, setIsBigScreen] = useState(
-        window.matchMedia("(min-width: 1900px)").matches
-    )
-    useEffect(() => {
-        window
-            .matchMedia("(min-width: 1900px)")
-            .addEventListener('change', e => {
-                setIsBigScreen(e.matches)
-            });
-    }, []);
+    const isMobileScreen = useMediaQuery("(max-width: 767px)");
 
-    /**
-     * Control Media Query-Based Sizing: Small Screens
-     */
-    const [isMediumScreen, setIsMediumScreen] = useState(
-        window.matchMedia("(min-width: 1500px)").matches
-    )
-    useEffect(() => {
-        window
-            .matchMedia("(min-width: 1500px)")
-            .addEventListener('change', e => {
-                setIsMediumScreen(e.matches)
-            });
-    }, []);
+    // Laptop screens (typically screens between 768px and 1440px)
+    const isLaptopScreen = useMediaQuery("(min-width: 768px) and (max-width: 1439px)");
+
+    // Desktop screens (typically screens 1440px and wider)
+    const isDesktopScreen = useMediaQuery("(min-width: 1440px)");
 
     return (
         <ChakraProvider>
-
-                {/** Menu Item */}
-                <MenuLite isSmall={isMediumScreen} currPage={currentPage} pageSetter={setCurrentPage} darkMode={darkMode} setDarkMode={setDarkMode} />
+                
+                {/* * Menu Item  */}
+                {/* <MenuLite isSmall={isDesktopScreen} currPage={currentPage} pageSetter={setCurrentPage} darkMode={darkMode} setDarkMode={setDarkMode} /> */}
 
                 {/** Main Portfolio Page */}
-                {currentPage === 'portfolio' && <PortfolioPage isDarkMode={darkMode} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen} />}
+                {/* {currentPage === 'portfolio' && <PortfolioPage isDarkMode={darkMode} isBigScreen={isDesktopScreen} isMediumScreen={isLaptopScreen} />} */}
 
                 {/** About Me Page */}
-                {currentPage === 'about' && <AboutPage isMediumScreen={isMediumScreen} />}
+                {/* {currentPage === 'about' && <AboutPage isMediumScreen={isLaptopScreen} />} */}
+
+                <SimplePortfolio isDarkMode={darkMode} isDesktopScreen={isDesktopScreen} isLaptopScreen={isLaptopScreen} isMobileScreen={isMobileScreen}/>
+                
 
         </ChakraProvider>
     );

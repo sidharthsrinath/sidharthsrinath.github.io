@@ -4,6 +4,160 @@ import Info from '../json/technicalSkills.json'
 import { set } from "lodash";
 import { ArrowDownIcon, ArrowUpIcon } from "@chakra-ui/icons";
 import { Expand, ExpandLess, ExpandMore } from "@mui/icons-material";
+import { ColorModeSwitcher } from "../ColorModeSwitcher";
+
+type ListSectionProps = {
+    data: JSON
+    type: string
+    name: string
+    id: string
+    layer: number,
+    cornerRadius: number,
+    fontFamily: string,
+    fontSize: number,
+    fontWeight: number,
+    fontStyle: string,
+    textColor: string,
+    bgColor: string,
+    bgOpacity: number,
+    border: string,
+    listSpacing: number,
+    activeTab: string,
+    expandWidth: number
+}
+const ListSection: React.FC<ListSectionProps> = ({ id, type, layer, cornerRadius, fontFamily, fontSize, listSpacing, fontWeight, fontStyle, textColor, bgColor, bgOpacity, border, activeTab, expandWidth }) => {
+
+    const [hoveredElement, setHoveredElement] = useState<string>('')
+    const [listExpanded, setListExpanded] = useState<boolean>(false)
+
+    const sectionCSS = {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'start',
+        alignItems: 'center',
+        gap: '2.5px',
+    } as React.CSSProperties
+    const titleCSS = {
+        position: 'relative',
+        cursor:'default',
+        width: '100%',
+        fontFamily,
+        fontStyle,
+        fontSize,
+        fontWeight,
+        color: textColor,
+        borderBottom: border,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: ' 0 2px',
+        overflowX: 'hidden',
+    } as React.CSSProperties
+
+    const listContainerCSS = {
+        width: '100%',
+        height: listExpanded ? '100%' : '0px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'start',
+        alignItems: 'center',
+        gap: `${listSpacing}px`,
+        overflowY: 'clip',
+        scrollbarWidth: 'none',
+    } as React.CSSProperties
+
+    return (
+        <div /** List Section Container */
+            key={`${activeTab.split('-')[1]}-${id}-container`}
+            style={sectionCSS}
+        >
+            {/** Tools Title  Area */}
+            <span
+                onClick={() => setListExpanded(!listExpanded)}
+                style={titleCSS}
+            >
+                {/** Close Items */}
+                <span
+                    style={{
+                        height: '100%',
+                        transform: listExpanded ? 'rotate(0deg)' : 'rotate(-90deg)',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
+                    <ExpandMore
+                        style={{
+                            width: `${expandWidth}px`,
+                        }}
+                    />
+                </span>
+                <span
+                    style={{
+                        minWidth: '95%',
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}
+                >
+                    {type}
+                </span>
+
+            </span>
+
+            {/** Tools List Container*/}
+            <div
+                id={`${type}-list-container`}
+                style={listContainerCSS}
+            >
+                {/** Tools List */}
+                {Array.from(Info[activeTab ? activeTab.split('-')[1] : 'Data Science'][type]).map((tool: string, index) => {
+                    const currId = `tools-${tool}`
+
+                    return (
+                        <div
+                            key={`${activeTab.split('-')[1]}-${id}-${index}`}
+                            id={currId}
+                            onMouseEnter={() => {
+                                setHoveredElement(currId)
+                            }}
+                            onMouseLeave={() => {
+                                setHoveredElement('')
+                            }}
+                            style={{
+                                position: 'relative',
+                                zIndex: layer + 5,
+                                width: '100%',
+                                minHeight: fontSize * 1.5,
+                                height: '5%',
+                                borderRadius: cornerRadius,
+                                border: border,
+                                fontFamily,
+                                fontStyle,
+                                fontSize,
+                                fontWeight,
+                                color: textColor,
+                                backgroundColor: (hoveredElement === currId) ? `${bgColor}${bgOpacity}` : 'transparent',
+                                textOverflow: 'ellipsis',
+                                overflow: 'hidden',
+                                whiteSpace: 'nowrap',
+                            }}
+                        >
+                            <span
+                                style={{
+                                    position: 'absolute',
+                                    right: '2px',
+                                }}>
+                                {tool}
+                            </span>
+                        </div>
+                    )
+                })}
+            </div>
+
+        </div>
+    )
+}
 
 const StrikeThrough: React.FC<{ id: string; hoveredTab: string, layer: number }> = ({ id, hoveredTab, layer }) => {
     return (
@@ -25,38 +179,55 @@ const StrikeThrough: React.FC<{ id: string; hoveredTab: string, layer: number }>
 }
 
 type TechnicalProficienciesAreaProps = {
-    layer?: number
+    layer?: number,
+    isBigScreen: boolean,
+    isMediumScreen: boolean,
+    plainBgColor: string,
+    mainColor: string,
+    canvasBgColor: string,
 }
-const TechnicalProficienciesArea: React.FC<TechnicalProficienciesAreaProps> = ({ layer = 0 }) => {
+const TechnicalProficienciesArea: React.FC<TechnicalProficienciesAreaProps> = ({ layer = 0, isBigScreen, isMediumScreen, plainBgColor, mainColor, canvasBgColor }) => {
+
+    const info = JSON.parse(JSON.stringify(Info))
 
     const [headers, setHeaders] = useState<string[]>([])
 
     const [hoveredTab, setHoveredTab] = useState<string>('')
-    const [activeTab, setActiveTab] = useState<string>(undefined)
+    const [activeTab, setActiveTab] = useState<string>('tab-Data Science')
+    const activeSectionName = activeTab.split('-')[1]
+    const activeSectionData = info[activeSectionName]
     const [toolsExpanded, setToolsExpanded] = useState<boolean>(true)
-
-    const plainBgColor = '#FFFFFF'
-    const mainColor = '#F94C10'
+    
+    const animationDelay = (isBigScreen || isMediumScreen) ? 100 : 0 //ms
     const contrastColor = '#F8DE22'
     const contrastOpacity = 35
 
     const font = "VT323, monospace"
 
-    const tabFontSize = 18
+    const activeTabBgInitLeft = -50
+
+    const tabFontSize = isBigScreen || isMediumScreen ? 18 : 13
     const tabFontWeight = 400
     const tabFontStyle = 'normal'
 
-    const listFontSize = 18
+    const listFontSize = isBigScreen || isMediumScreen ? 18 : 14
     const listFontWeight = 400
     const listFontStyle = 'normal'
     const listSpacing = 2
 
+    const expandWidth = (isBigScreen || isMediumScreen) ? 20 : 15
+
+    const contentAreaMaxHeight = 95
+    const contentAreaSpacing = 5
+
+    const contentListWidth = '30%'
+
     const outerPadding = 10
     const innerPadding = '.5vh .5vw'
-    const containerWidth = 80
-    const containerHeight = 80
+    const containerWidth = isBigScreen || isMediumScreen ? 85 : 80
+    const containerHeight = isBigScreen || isMediumScreen ? 80 : 70
     const containerBorder = `1px solid ${mainColor}`
-    const containerBgColor = `${mainColor}20`
+    const containerBgColor = `${canvasBgColor}`
     const containerBgBlur = `blur(10px)`
 
     const cornerRadius = 6
@@ -71,13 +242,14 @@ const TechnicalProficienciesArea: React.FC<TechnicalProficienciesAreaProps> = ({
     }
 
     const updateActiveBg = () => {
-        const activeTabBg = document.getElementById('active-tab-bg')
+        const activeTabBg = document.getElementById(`active-tab-bg-${layer}`)
         const activeTabEl = document.getElementById(activeTab)
-        const containerLeft = document.getElementById('tabs-container').getBoundingClientRect().left
+        const containerLeft = document.getElementById(`tabs-container-${layer}`).getBoundingClientRect().left
 
         if (activeTabBg && activeTabEl) {
             const activeTabRect = activeTabEl.getBoundingClientRect()
             activeTabBg.style.width = `${activeTabRect.width}px`
+            activeTabBg.style.height = `${activeTabRect.height}px`
             activeTabBg.style.left = `${activeTabRect.left - containerLeft}px`
         }
     }
@@ -109,8 +281,9 @@ const TechnicalProficienciesArea: React.FC<TechnicalProficienciesAreaProps> = ({
     }, [activeTab,])
 
     useEffect(() => {
-        setHeaders(Object.keys(Info).reverse())
+        setHeaders(Object.keys(info).reverse())
     }, [])
+
 
     return (
         <div
@@ -138,11 +311,12 @@ const TechnicalProficienciesArea: React.FC<TechnicalProficienciesAreaProps> = ({
                     flexDirection: 'column',
                     gap: '.5rem',
                     padding: outerPadding,
+                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                 }}
             >
                 {/** Tabs Container*/}
                 <div
-                    id={'tabs-container'}
+                    id={`tabs-container-${layer}`}
                     style={{
                         width: '100%',
                         minHeight: '5%',
@@ -164,7 +338,7 @@ const TechnicalProficienciesArea: React.FC<TechnicalProficienciesAreaProps> = ({
                                 id={`tab-${tab}`}
                                 key={`key-${tab}`}
                                 onMouseEnter={async () => {
-                                    await setTimeout(() => setActiveTab(`tab-${tab}`), 100) //give effect of slight delay
+                                    await setTimeout(() => setActiveTab(`tab-${tab}`), animationDelay) //give effect of slight delay
                                 }}
                                 onMouseDown={() => {
                                     const curr = document.getElementById(`tab-${tab}`)
@@ -180,13 +354,14 @@ const TechnicalProficienciesArea: React.FC<TechnicalProficienciesAreaProps> = ({
 
                     {/** Active Tab Background */}
                     <div
-                        id={'active-tab-bg'}
+                        key={`active-tab-bg-${layer}`}
+                        id={`active-tab-bg-${layer}`}
                         style={{
                             zIndex: Math.min(1, layer + 2),
                             position: 'absolute',
                             padding: `1vh 1vw`,
                             width: '1px',
-                            left: -50,
+                            left: activeTabBgInitLeft,
                             height: '100%',
                             backgroundColor: `${contrastColor}${contrastOpacity}`,
                             borderBottomLeftRadius: cornerRadius,
@@ -203,7 +378,7 @@ const TechnicalProficienciesArea: React.FC<TechnicalProficienciesAreaProps> = ({
                         position: 'relative',
                         width: '100%',
                         height: '100%',
-                        maxHeight: '95%',
+                        maxHeight: `${contentAreaMaxHeight}%`,
                         borderLeft: containerBorder,
                         borderBottom: containerBorder,
                         borderBottomLeftRadius: cornerRadius,
@@ -211,8 +386,8 @@ const TechnicalProficienciesArea: React.FC<TechnicalProficienciesAreaProps> = ({
                         flexDirection: 'row',
                         justifyContent: 'start',
                         alignItems: 'start',
-                        padding: '5px',
-                        gap: '5px',
+                        padding: `${contentAreaSpacing}px`,
+                        gap: `${contentAreaSpacing}px`,
                     }}
                 >
                     {/** Info Area Container */}
@@ -222,118 +397,44 @@ const TechnicalProficienciesArea: React.FC<TechnicalProficienciesAreaProps> = ({
                             position: 'relative',
                             border: containerBorder,
                             borderRadius: cornerRadius,
-                            width: '30%',
+                            width: contentListWidth,
                             height: '100%',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'start',
                             alignItems: 'center',
                             padding: '2.5px',
                             overflow: 'scroll',
                             scrollbarWidth: 'none',
+
                         }}
                     >
-                        {/** Tools Container */}
-                        <div
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                justifyContent: 'start',
-                                alignItems: 'center',
-                                gap: '2.5px',
-                            }}
-                        >
-                            {/** Tools Title  Area */}
-                            <span
-                                style={{
-                                    position: 'relative',
-                                    width:'100%',
-                                    fontFamily: font,
-                                    fontStyle: tabFontStyle,
-                                    fontSize: tabFontSize,
-                                    fontWeight: tabFontWeight,
-                                    color: mainColor,
-                                    borderBottom: containerBorder,
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                }}
-                            >
-                                {/** Close Items */}
-                                <span
-                                    style={{
-                                        height:'100%',
-                                        position: 'absolute',
-                                        left:0,
-                                        top:0,
-                                        cursor: 'pointer',
-                                        transform: toolsExpanded ? 'rotate(0deg)' : 'rotate(-90deg)',
-                                    }}
-                                    onClick={() => setToolsExpanded(!toolsExpanded)}
-                                >
-                                    <ExpandMore />
-                                </span>
-                                Tools
-                            </span>
-
-                            {/** Tools List Container*/}
-                            <div
-                                id={'tools-list-container'}
-                                style={{
-                                    width: '100%',
-                                    height: toolsExpanded ? '100%' : '0%',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    justifyContent: 'start',
-                                    alignItems: 'center',
-                                    gap: `${listSpacing}px`,
-                                    overflowY: 'scroll',
-                                    scrollbarWidth: 'none',
-                                }}
-                            >
-                                {/** Tools List */}
-                                {Array.from(Info[activeTab ? activeTab.split('-')[1] : 'Data Science']['Tools']).map((tool: string, index) => (
-                                    <div
-                                        id={`tools-${tool}`}
-                                        onMouseEnter={() => {
-                                            document.getElementById(`tools-${tool}`).style.backgroundColor = `${contrastColor}${contrastOpacity}`
-                                        }}
-                                        onMouseLeave={() => {
-                                            document.getElementById(`tools-${tool}`).style.backgroundColor = ''
-                                        }}
-                                        style={{
-                                            position: 'relative',
-                                            zIndex: layer + 5,
-                                            width: '100%',
-                                            minHeight: tabFontSize * 1.5,
-                                            height: '5%',
-                                            borderRadius: cornerRadius,
-                                            border: containerBorder,
-                                            fontFamily: font,
-                                            fontStyle: listFontStyle,
-                                            fontSize: listFontSize,
-                                            fontWeight: listFontWeight,
-                                            color: mainColor,
-                                        }}
-                                    >
-                                        <span
-                                            style={{
-                                                position: 'absolute',
-                                                right: '5px',
-                                                textOverflow: 'ellipsis',
-                                                overflow: 'hidden',
-                                                whiteSpace: 'nowrap',
-                                            }}>
-                                            {tool}
-                                        </span>
-                                    </div>
-                                ))}
-                            </div>
-
-                        </div>
+                        {/**  */}
+                        {activeSectionData && // Ensure the data exists
+                            Array.from(Object.entries(activeSectionData)).map(([type, data], index) => {
+                                if (type === 'Tags' || type === 'Experiences') return //skip tags and experiences here
+                                return (
+                                    <ListSection
+                                        key={`${activeSectionName}-${type}`}
+                                        type={type}
+                                        data={info}
+                                        name={type}
+                                        id={`list-${activeSectionName}-${type}`}
+                                        layer={index * 5}
+                                        cornerRadius={cornerRadius}
+                                        fontFamily={font}
+                                        fontSize={listFontSize}
+                                        fontWeight={listFontWeight}
+                                        fontStyle={listFontStyle}
+                                        textColor={mainColor}
+                                        bgColor={contrastColor}
+                                        bgOpacity={contrastOpacity}
+                                        border={containerBorder}
+                                        listSpacing={listSpacing}
+                                        expandWidth={expandWidth}
+                                        activeTab={activeTab}
+                                    />
+                                )
+                            })}
                     </div>
+
 
                     {/** Experiences Area Container */}
                     <div
@@ -355,14 +456,13 @@ const TechnicalProficienciesArea: React.FC<TechnicalProficienciesAreaProps> = ({
                             fontSize: tabFontSize,
                             color: mainColor,
                         }}
-                    >   
-                        <h1 style={{fontSize: '40px',}}>Experiences</h1>
-                        <p style={{fontSize: '20px',}}>Coming soon....</p>
+                    >
+                        <h1 style={{ fontSize: '40px', }}> {activeTab?.split('-')[1]} <br /> Experiences</h1>
+                        <p style={{ fontSize: '20px', }}>Coming soon....</p>
                     </div>
                 </div>
 
             </div>
-
         </div>
     )
 }

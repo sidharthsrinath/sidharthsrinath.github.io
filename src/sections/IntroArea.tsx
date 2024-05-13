@@ -1,6 +1,7 @@
 import Typed from 'typed.js'
 import { useEffect, useRef, useState } from "react"
 import { CursorCircle } from '../components'
+import { ArrowOutward, ArrowUpward } from '@mui/icons-material'
 
 type IntroAreaProps = {
     accentColor?: string
@@ -18,6 +19,7 @@ const IntroArea: React.FC<IntroAreaProps> = ({ accentColor = 'blue', bgColor, te
     const [update, setUpdate] = useState(false)
     const [infoIsHovered, setInfoIsHovered] = useState(false)
 
+    const font = "VT323, monospace, sans serif" //"Nanum Gothic Coding"
     const introFontSize = isMediumScreen ? isBigScreen ? 65 : 50 : 40
     const langFontSize = isMediumScreen ? isBigScreen ? 15 : 12 : 10
     const textOpacity = isBigScreen || isMediumScreen ? infoIsHovered ? 1 : .1 : 1
@@ -30,7 +32,7 @@ const IntroArea: React.FC<IntroAreaProps> = ({ accentColor = 'blue', bgColor, te
     const spacingTop = 0
     const spacingIn = 5
 
-    const introPositioning = 'fixed'
+    const introPositioning = (isBigScreen || isMediumScreen) ? 'fixed' : 'absolute'
 
     const strings = [
         `Hey,<br>I\'m <span style="text-decoration:underline; text-decoration-color:${accentColor}">Sid</span>. `, // English
@@ -67,11 +69,6 @@ const IntroArea: React.FC<IntroAreaProps> = ({ accentColor = 'blue', bgColor, te
             // setIntroLeft(Math.max(0, 20 - ((window.scrollY % window.innerHeight) / window.innerHeight) * 20))
         }
 
-        window.addEventListener('scroll', textEffect)
-
-
-
-        let observer: MutationObserver;
 
         if (el1.current) {
             const typed1 = new Typed(el1.current, {
@@ -87,6 +84,8 @@ const IntroArea: React.FC<IntroAreaProps> = ({ accentColor = 'blue', bgColor, te
                 onComplete: (() => setCurrentStringIndex(0)),
             })
 
+            /** Change language annotation when intro text switches languages */
+            let observer: MutationObserver;
             // Setup a MutationObserver to watch text changes
             observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
@@ -97,14 +96,18 @@ const IntroArea: React.FC<IntroAreaProps> = ({ accentColor = 'blue', bgColor, te
                     }
                 })
             })
-
             observer.observe(el1.current, {
                 childList: true, // Watch for text changes
             })
 
+
+            if (isBigScreen || isMediumScreen) window.addEventListener('scroll', textEffect)
+
+
             return () => {
                 typed1.destroy();
                 observer.disconnect() // Clean up the observer
+                if (isBigScreen || isMediumScreen) window.addEventListener('scroll', textEffect)
                 window.removeEventListener('scroll', textEffect)
             }
         }
@@ -113,7 +116,8 @@ const IntroArea: React.FC<IntroAreaProps> = ({ accentColor = 'blue', bgColor, te
     return (
         <div
             style={{
-                height: '100vh',
+                minHeight: '100vh',
+                maxHeight: '100vh',
                 position: 'relative',
                 overflow: 'auto',
                 zIndex: 0,
@@ -142,7 +146,7 @@ const IntroArea: React.FC<IntroAreaProps> = ({ accentColor = 'blue', bgColor, te
                         color: textColor,
                         fontSize: `${introFontSize}px`,
                         fontWeight: 300,
-                        fontFamily: "Nanum Gothic Coding",
+                        fontFamily: font,
                     }}
                 />
                 {/** TODO: make this divider way cooler (wavy maybe?) */}
@@ -159,14 +163,14 @@ const IntroArea: React.FC<IntroAreaProps> = ({ accentColor = 'blue', bgColor, te
                             borderTop: divBorder,
                             opacity: textOpacity,
                         }}
-                    /> }
+                    />}
                     <span
                         ref={el2}
                         style={{
                             color: textColor,
                             fontSize: `${langFontSize}px`,
                             fontWeight: 350,
-                            fontFamily: "Nanum Gothic Coding",
+                            fontFamily: font,
                             opacity: textOpacity,
                         }}
                     >
@@ -175,7 +179,6 @@ const IntroArea: React.FC<IntroAreaProps> = ({ accentColor = 'blue', bgColor, te
                 </div>
 
             </div>
-
 
         </div>
     )

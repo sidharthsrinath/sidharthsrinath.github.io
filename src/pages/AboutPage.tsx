@@ -70,7 +70,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ isMediumScreen }) => {
                     }}
                 >
                     <img
-                        src={require('../assets/me_jtree.JPG')}
+                        src={require('../assets/me_jtree.jpg')}
                         style={{
                             pointerEvents: 'none',
                             margin: isMediumScreen ? '7% 5%' : '15% 25%',

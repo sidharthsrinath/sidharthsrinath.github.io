@@ -69,14 +69,14 @@ const ProjectArea: React.FC<ProjectAreaProps> = ({ isBigScreen, isMediumScreen, 
     
     useEffect(() => {
         setPrevEl(currEl)
-        /** Sticky Effect for the page */
-        const handleScroll = () => {
-            const currTop = window.scrollY
-            if (layer === 2) console.log(currTop, (layer) * window.innerHeight)
-            setPosition(currTop > (layer - 1) * window.innerHeight + thresh ? 'fixed' : 'relative')
-        }
-        window.addEventListener('scroll', handleScroll)
-        return () => window.removeEventListener('scroll', handleScroll)
+        // /** Sticky Effect for the page */
+        // const handleScroll = () => {
+        //     const currTop = window.scrollY
+        //     if (layer === 2) console.log(currTop, (layer) * window.innerHeight)
+        //     setPosition(currTop > (layer - 1) * window.innerHeight + thresh ? 'fixed' : 'relative')
+        // }
+        // window.addEventListener('scroll', handleScroll)
+        // return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
     useEffect(() => {
@@ -107,10 +107,10 @@ const ProjectArea: React.FC<ProjectAreaProps> = ({ isBigScreen, isMediumScreen, 
                     backgroundColor: bgColor,
                     display: 'flex',
                     flexDirection: 'column',
-                    transition: 'all 1s',
+                    // transition: 'all 1s',
                 }}
             >
-                <div
+                {/* <div
                     style={{
                         position: 'relative',
                     }}
@@ -131,7 +131,7 @@ const ProjectArea: React.FC<ProjectAreaProps> = ({ isBigScreen, isMediumScreen, 
                     >
                         Projects
                     </div>
-                </div>
+                </div> */}
 
                 <div
                     style={{

@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react'
 /**
+ * utils
+ */
+import getResultantColor from '../utils/ColorUtils'
+
+/**
  * Theme Dependancies (ancitipated use in later versions)
  */
 import { useDispatch, useSelector } from 'react-redux'
@@ -23,11 +28,14 @@ type PortfolioPageProps = {
     isMediumScreen: boolean
 }
 export const PortfolioPage: React.FC<PortfolioPageProps> = ({ isDarkMode, isBigScreen, isMediumScreen }) => {
-    const bgColorMain = isDarkMode ? '#B70404' : '#FFFFFF'
+    const bgColorMain = isDarkMode ? '#BC7FCD' : '#FFFFFF'
     const textColorMain = isDarkMode ? "#FEF2F4" : '#F31559'
 
-    const bgColorSecondary = isDarkMode ? '#B70404' : '#FFFFFF'
+    const bgColorSecondary = isDarkMode ? '#75BBA7' : '#FFFFFF'
     const textColorSecondary = isDarkMode ? '#FDFF00' : "#C21292"
+
+    const bgColorTertiary = isDarkMode ? '#FB6D48' : '#FFFFFF'
+    const textColorTertiary = isDarkMode ? '#F7EEDD' : "#F94C10"
 
     const highlightColor = isDarkMode ? "#FEF2F4" : '#F31559'
     const highlightTextColor = isDarkMode ? '#B70404' : '#FBFBFB'
@@ -40,10 +48,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ isDarkMode, isBigS
         <div
             style={{
                 position: 'relative', // Positioned relatively to restrict cursor circle
-                // overflowX: 'hidden', // meant for cursor circle to npt create extra space - taken out cuz no more cursor circle + dynamic
-                // width: '100%',
-                // overflowY: 'hidden',
-                // scrollbarWidth: 'none',
+                maxWidth:'100vw',
             }}
         >
             <div
@@ -55,7 +60,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ isDarkMode, isBigS
                 } as React.CSSProperties}
             >
                 {/** FIXED POSITION: Custom Scrollbar */}
-                <CustomScrollbar key={0} colors={[bgColorMain, bgColorSecondary,bgColorSecondary,bgColorSecondary]} pageColors={[textColorMain, textColorSecondary, textColorSecondary, textColorSecondary]} showLastPage={true} />
+                <CustomScrollbar key={0} colors={[textColorMain, textColorTertiary, textColorSecondary, textColorSecondary]} pageColors={[bgColorMain, bgColorTertiary,bgColorSecondary,bgColorSecondary]} showLastPage={true} />
                 {/** FIXED POSITION: Transitionary arrow */}
                 <TransitionArrow key={1} arrowColor={textColorMain} />
 
@@ -63,10 +68,11 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ isDarkMode, isBigS
                 <IntroArea key={2} accentColor={textUnderlineColor} bgColor={bgColorMain} textColor={textColorMain} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen} />
 
                 {/** ITEM 2 */}
-                <TechnicalProficienciesArea key={3}/>
+                <TechnicalProficienciesArea key={3} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen} plainBgColor={bgColorTertiary} mainColor={textColorTertiary} canvasBgColor={`${getResultantColor(textColorTertiary, bgColorTertiary)}`} layer={3}/>
 
                 {/** ITEM 3 */}
-                <ProjectArea key={4} titleBgColor={titleBgColor} bgColor={bgColorSecondary} textColor={textColorSecondary} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen} layer={4}/>
+
+                <TechnicalProficienciesArea key={3} isBigScreen={isBigScreen} isMediumScreen={isMediumScreen} plainBgColor={bgColorSecondary} mainColor={textColorSecondary} canvasBgColor={`${getResultantColor(textColorSecondary, bgColorSecondary)}`} layer={4}/>
 
 
 

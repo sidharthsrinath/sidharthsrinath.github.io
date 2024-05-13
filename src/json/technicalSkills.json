@@ -4,7 +4,7 @@
         "Libraries" : ["Numpy", "Pandas", "Matplotlib", "Seaborn", "Plotly", "Scipy", "Statsmodels"],
         "Languages" : ["Python", "C", "C++", "SQL"],
         "Tools" : ["Jupyter", "Run.ai", "WandB (Weights and Biases)", "Azure Custom Vision", "PowerBI"],
-        "Experiences" : ["Sony Electronics", "Salk Institute of Biological Studies", "UCSD", "MedSmart AI"],
+        "Experiences" : ["Sony Electronics", "Salk Institute for Biological Studies", "UCSD", "MedSmart AI"],
         "Tags" : ["Computer Vision", "Time Series", "Autoregressive Models", "Deep Generative Models", "Transformers", "Clustering"]
     },
     "Data Science" : {
@@ -12,7 +12,7 @@
         "Libraries" : ["Numpy", "Pandas", "Matplotlib", "Seaborn", "Plotly", "Scipy", "Statsmodels"],
         "Languages" : ["Python", "R", "JavaScript", "TypeScript", "SQL"],
         "Tools" : ["Jupyter", "Google Colab", "Databricks", "Tableau", "PowerBI"],
-        "Experiences" : ["Sony Electronics", "Salk Institute of Biological Studies", "UCSD", "MedSmart AI"],
+        "Experiences" : ["Sony Electronics", "Salk Institute for Biological Studies", "UCSD", "MedSmart AI"],
         "Tags" : ["Data Cleaning", "Data Wrangling", "Data Visualization", "Statistical Analysis", "Predictive Modeling", "Machine Learning"]
     },
     "Backend" : {
@@ -28,7 +28,7 @@
         "Languages": ["JavaScript", "TypeScript", "HTML", "CSS", "SASS"],
         "Libraries" : ["React.js", "Redux.js", "Node.js","Next.js","Vite", "TailwindCSS", "Bootstrap", "Material-UI", "Chakra-UI"],
         "Tools" : ["Webpack", "Babel", "ESLint", "Prettier", "Jest", "Cypress", "Storybook"],
-        "Experiences" : ["Sony Electronics", "MedSmart AI"],
+        "Experiences" : ["Sony Electronics", "MedSmart AI", "Werfen North America"],
         "Tags" : ["Responsive Design", "Single Page Applications", "Progressive Web Apps", "Server Side Rendering", "Static Site Generation", "Serverless Web Apps", "Material Design"]
     }
 }
