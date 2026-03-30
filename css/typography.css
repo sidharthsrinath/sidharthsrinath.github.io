@@ -18,7 +18,8 @@ body {
 
 .body-text {
   font-size: 14px;
-  font-weight: 300;
+  font-weight: 400;
+  text-align: flex-end;
 }
 
 .nav-link {
@@ -31,10 +32,16 @@ body {
   font-weight: 500;
 }
 
-.experience-date {
+.experience-subtitle {
   font-size: 14px;
 }
 
 .experience-org {
+}
+
+.experience-date {
+}
+
+.project-tech {
   font-size: 14px;
 }

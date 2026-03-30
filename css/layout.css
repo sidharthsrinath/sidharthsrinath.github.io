@@ -70,25 +70,23 @@ body {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  margin: 4px 0 0 0;
+  margin-left: 20%;
 }
 
-.experience-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.experience-date {
+.experience-subtitle {
   color: #97999a;
 }
 
 .experience-org {
-  color: #97999a;
+  color: #cc3300;
 }
 
-.experience-item {
-  margin: 4px 0 0 0;
-  margin-left: 20%;
+.experience-date {
+}
+
+.project-tech {
+  color: #cc3300;
 }
 
 /* Responsive */

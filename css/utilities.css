@@ -37,7 +37,8 @@ a.icon-link:hover {
 }
 
 .nav-link.active {
-  color: black;
+  /* color: black; */
+  color: #cc3300;
   text-decoration: underline;
   text-decoration-style: wavy;
 }
