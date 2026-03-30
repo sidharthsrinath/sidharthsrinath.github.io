@@ -15,19 +15,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
-
 /* Main Page Layout */
 
 #main-content {
-  margin: 225px 425px;
+  margin: 50px 425px;
   display: flex;
   flex-direction: column;
   gap: 96px;
 }
-
-
 
 
 /* Portfolio Header */
@@ -55,7 +50,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 34px;
-  flex-basis: 50%;
 }
 
 
@@ -172,161 +166,73 @@ body {
   height: auto;
 }
 
-/* Timeline Container */
-.timeline {
-    display: flex;
-    justify-content: center;
-    margin: 20px auto;
-    padding: 20px;
-  }
-  
-  /* Card container */
-  .card {
-    position: relative;
-    max-width: 400px;
-  }
-  
-  /* setting padding based on even or odd */
-  .card:nth-child(odd) {
-    padding: 30px 0 30px 30px;
-  }
-  .card:nth-child(even) {
-    padding: 30px 30px 30px 0;
-  }
-  /* Global ::before */
-  .card::before {
-    content: "";
-    position: absolute;
-    width: 50%;
-    border: solid #97999a;
-  }
-  
-  /* Setting the border of top, bottom, left */
-  .card:nth-child(odd)::before {
-    left: 0px;
-    top: -4.5px;
-    bottom: -4.5px;
-    border-width: 5px 0 5px 5px;
-    border-radius: 50px 0 0 50px;
-  }
-  
-  /* Setting the border of top, bottom, right */
-  .card:nth-child(even)::before {
-    right: 0;
-    top: 0;
-    bottom: 0;
-    border-width: 5px 5px 5px 0;
-    border-radius: 0 50px 50px 0;
-  }
-  
-  /* Removing the border if it is the first card */
-  .card:first-child::before {
-    border-top: 0;
-    border-top-left-radius: 0;
-  }
-  
-  /* Removing the border if it is the last card  and it's odd */
-  .card:last-child:nth-child(odd)::before {
-    border-bottom: 0;
-    border-bottom-left-radius: 0;
-  }
-  
-  /* Removing the border if it is the last card  and it's even */
-  .card:last-child:nth-child(even)::before {
-    border-bottom: 0;
-    border-bottom-right-radius: 0;
-  }
-  
-  /* Information about the timeline */
-  .info {
-    display: flex;
-    flex-direction: column;
-    background: #f4f3f3;
-    color: black;
-    border-radius: 10px;
-    padding: 10px;
-  }
-  
-  /* Title of the card */
-  .title {
-    color: #2E86C1;
-    position: relative;
-    margin-bottom: 7px;
-  }
-  
-  /* Timeline dot  */
-  .title::before {
-    content: "";
-    position: absolute;
-    margin: 0 -2.5px;
-    width: 15px;
-    height: 15px;
-    background:white;
-    border-radius: 999px;
-    border: 3px solid black;
-  }
-  
-.title .dot-text {
-    display: inline-block;
-    width: 20px; /* Size of the dot */
-    height: 20px; /* Size of the dot */
-    line-height: 20px; /* Center the text vertically */
-    text-align: center; /* Center the text horizontally */
-    border-radius: 50%; /* Make it circular */
-    background-color: #000; /* Dot color */
-    color: #fff; /* Text color */
-    font-size: 8px; /* Adjust based on your design */
-    margin-right: 8px; /* Space between the dot and the title text */
-}  
+/* Experience List */
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 16px;
+}
 
-  .org {
-    color:#A93226; 
-    margin-top: 0;
-    font-size: 15px;
-  }
-  /* text right if the card is even  */
-  .card:nth-child(even) > .info > .title {
-    text-align: right;
-  }
-  
-  /* setting dot to the left if the card is odd */
-  .card:nth-child(odd) > .info > .title::before {
-    left: -45px;
-  }
-  
-  /* setting dot to the right if the card is odd */
-  .card:nth-child(even) > .info > .title::before {
-    right: -45px;
-  }
-  
-  
+.experience-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.experience-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.experience-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.experience-date {
+  font-size: 14px;
+  color: #97999a;
+}
+
+.experience-org {
+  color: #2E86C1;
+  font-size: 15px;
+}
+
+.experience-item .body-text {
+  margin: 4px 0 0 0;
+}
+
+
 
 
 /* Extra Extra large devices (large laptops and desktops, 1200px and below) */
 @media only screen and (max-width: 1600px) {
   #main-content {
-    margin: 225px 275px;
+    margin: 50px 275px;
   }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and below) */
 @media only screen and (max-width: 1200px) {
   #main-content {
-    margin: 225px 175px;
+    margin: 50px 175px;
   }
 }
 
 /* Large devices (laptops/desktops, 1000px and below) */
 @media only screen and (max-width: 1000px) {
   #main-content {
-    margin: 225px 75px;
+    margin: 50px 75px;
   }
 }
 
 /* Small devices (portrait tablets and large phones, 800px and below) */
 @media only screen and (max-width: 800px) {
   #main-content {
-    margin: 150px 50px;
+    margin: 40px 50px;
   }
 
   #portfolio-header {
@@ -347,7 +253,7 @@ body {
 /* Small devices (portrait tablets and large phones, 600px and below) */
 @media only screen and (max-width: 600px) {
   #main-content {
-    margin: 125px 20px;
+    margin: 30px 20px;
   }
 
   .project-card {

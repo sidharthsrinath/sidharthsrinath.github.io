@@ -32,12 +32,11 @@ a.icon-link:hover {
 /* Navbar Styling */
 
 .navbar {
-  width: 100%;
-  padding: 30px 50px;
+  /* width: 100%; */
+  padding: 30px 425px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
+  justify-content: flex-end;
+  /* align-items: end; */
   z-index: 10;
   top: 0;
   left: 0;
@@ -45,16 +44,42 @@ a.icon-link:hover {
 
 .nav-title-link {
   color: black;
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-style: wavy;
 }
 
 .nav-title-link:hover {
-    opacity: 0.7;
-  /*text-decoration: underline;*/
+  /* opacity: 0.7; */
+  color: #2e86c17f;
+}
+
+@media only screen and (max-width: 1600px) {
+  .navbar {
+    padding: 30px 275px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .navbar {
+    padding: 30px 175px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .navbar {
+    padding: 30px 75px;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 800px and below) */
 @media only screen and (max-width: 800px) {
+  .navbar {
+    padding: 20px 50px;
+    background-color: white
+  }
+}
+
+@media only screen and (max-width: 600px) {
   .navbar {
     padding: 20px 20px;
     background-color: white
@@ -62,22 +87,24 @@ a.icon-link:hover {
 }
 
 .inline-link {
-    color:#2E86C1;
-    text-decoration:wavy;
+  color:black;
+  text-decoration: underline;
+  text-decoration-style: wavy;
 }
 
 .inline-link-ai{
-    font-size: 11px;
-    color:#2E86C1;
-    text-decoration:underline;
+  font-size: 11px;
+  color:#2E86C1;
+  text-decoration: underline;
 }
 
 .inline-link:hover{
-    font-weight: bold;
-    color:#A93226;
+  /* font-weight: bold; */
+  text-decoration: none;
+  color:#2e86c17f;
 }
 .inline-link-ai:hover{
-    color:#A93226;
+  color:#A93226;
 }
 
 /* Button Styling */
@@ -96,7 +123,7 @@ a.button {
 }
 
 a.button:hover {
-    opacity: 0.7;
+  opacity: 0.7;
   text-decoration-thickness: 2px;
   cursor: pointer;
 }
@@ -128,5 +155,11 @@ a.no-underline:hover {
 @media only screen and (max-width: 800px) {
   #footer {
     padding: 20px 20px;
+  }
+}
+
+@media only screen and (max-width: 1600px) {
+  #navbar {
+    margin: 225px 275px;
   }
 }
