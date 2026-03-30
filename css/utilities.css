@@ -1,13 +1,6 @@
 
 /* Icons */
 
-.right-arrow-icon {
-  width: 16px;
-  height: 16px;
-  margin-top: 1px;
-}
-
-
 .footer-icon {
   width: 20px;
   height: 20px;
@@ -24,33 +17,43 @@ a.icon-link:hover {
   transform: rotate(15deg);
 }
 
-.resume-button:hover {
-    opacity: .7;
-}
-
-
 /* Navbar Styling */
 
 .navbar {
-  /* width: 100%; */
   padding: 30px 425px;
   display: flex;
   justify-content: flex-end;
-  /* align-items: end; */
+  gap: 24px;
   z-index: 10;
-  top: 0;
-  left: 0;
 }
 
-.nav-title-link {
+.nav-link {
+  color: #97999a;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.nav-link:hover {
+  color: black;
+}
+
+.nav-link.active {
   color: black;
   text-decoration: underline;
   text-decoration-style: wavy;
 }
 
-.nav-title-link:hover {
-  /* opacity: 0.7; */
-  color: #2e86c17f;
+/* Page visibility */
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: flex;
+  flex-direction: column;
+  gap: 96px;
 }
 
 @media only screen and (max-width: 1600px) {
@@ -71,63 +74,40 @@ a.icon-link:hover {
   }
 }
 
-/* Small devices (portrait tablets and large phones, 800px and below) */
 @media only screen and (max-width: 800px) {
   .navbar {
     padding: 20px 50px;
-    background-color: white
   }
 }
 
 @media only screen and (max-width: 600px) {
   .navbar {
     padding: 20px 20px;
-    background-color: white
   }
 }
 
+/* Links */
+
 .inline-link {
-  color:black;
+  color: black;
   text-decoration: underline;
   text-decoration-style: wavy;
 }
 
-.inline-link-ai{
+.inline-link-ai {
   font-size: 11px;
-  color:#2E86C1;
+  color: #2E86C1;
   text-decoration: underline;
 }
 
-.inline-link:hover{
-  /* font-weight: bold; */
+.inline-link:hover {
   text-decoration: none;
-  color:#2e86c17f;
-}
-.inline-link-ai:hover{
-  color:#A93226;
+  color: #2e86c17f;
 }
 
-/* Button Styling */
-
-a.button {
-  padding: 8px 16px;
-  border: 3px solid #141414;
-  border-radius: 50px;
-  color: black;
-  text-decoration: none;
-  width: fit-content;
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  align-self: center;
+.inline-link-ai:hover {
+  color: #A93226;
 }
-
-a.button:hover {
-  opacity: 0.7;
-  text-decoration-thickness: 2px;
-  cursor: pointer;
-}
-
 
 /* Footer Styling */
 
@@ -140,26 +120,8 @@ a.button:hover {
   gap: 16px;
 }
 
-/* Link Styling */
-a.no-underline {
-  text-decoration: none;
-  color: black
-}
-
-a.no-underline:hover {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-/* Small devices (portrait tablets and large phones, 800px and below) */
 @media only screen and (max-width: 800px) {
   #footer {
     padding: 20px 20px;
-  }
-}
-
-@media only screen and (max-width: 1600px) {
-  #navbar {
-    margin: 225px 275px;
   }
 }

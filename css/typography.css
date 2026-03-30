@@ -1,24 +1,8 @@
 
 body {
-  text-align:right;
+  text-align: right;
   font-family: 'Varela Round', serif;
   letter-spacing: 2px;
-}
-
-
-.nav-title {
-  font-weight: 700;
-  font-size: 24px;
-}
-
-.button-text {
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.image-caption {
-  font-size: 14px;
-  font-weight: 500;
 }
 
 .main-title {
@@ -34,39 +18,4 @@ body {
 .body-text {
   font-size: 16px;
   font-weight: 500;
-}
-
-.project-card-text {
-  font-size: 14px;
-  text-align: center;
-  overflow: scroll;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 7;
-  -webkit-box-orient: vertical;
-}
-
-.project-title {
-  font-size: 18px;
-  color:#2E86C1;
-  text-align: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-}
-
-.project-title-lang {
-  font-size:16px;
-  text-align: center;
-  color:#A93226;
-  font-weight: bold;
-}
-
-.ai-notice{
-  letter-spacing: normal;
-  font-size: 11px;
-  color:#2E86C1;
-  text-decoration:wavy;
 }

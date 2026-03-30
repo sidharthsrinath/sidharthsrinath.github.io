@@ -2,17 +2,6 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-
-    <!--
-      TODO
-
-      Upload your Unemployable (or whatever photo you like) to the assets/images folder
-      and change the name of the image below to match the uploaded one
-
-      Change the title in the <title> tag to whatever you would like the title of your portfolio to be
-
-      This should be the same across all pages.
-     -->
     <link rel="icon" href="./assets/images/1311.png" />
 		<title>Sidharth Srinath</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,180 +15,24 @@
 	</head>
 	<body>
     <!-- NAVBAR -->
-    <div class="navbar">
-      <a class="nav-title-link" href="./index.html">
-        <!-- Name -->
-        <span class="nav-title">Sidharth Srinath</span>
-        <!-- Resume -->
-        <!-- <a class="resume-button" href ="https://drive.google.com/file/d/13mngv82Oe9jgXSZo5QtlYA-Zb0PUaasw/view?usp=sharing" target="_blank">
-          <image src="./assets/icons/resume.svg" class="footer-icon"/>
-        </a> -->
-      </a>
-    </div>
+    <nav class="navbar">
+      <a class="nav-link active" href="#" data-page="about">About Me</a>
+      <a class="nav-link" href="#" data-page="resume">Resume</a>
+      <a class="nav-link" href="#" data-page="projects">Projects</a>
+    </nav>
 
     <!-- MAIN PAGE CONTENT -->
     <div id="main-content">
-
-      <!-- PORTFOLIO HEADER -->
-      <div id="portfolio-header">
-        <!-- <div id="portfolio-header-image-container">
-          <img src="./assets/images/1311.png" class="portfolio-header-image">
-        </div> -->
-
-          <!--
-            TODO
-
-            - Change the main-title to whatver you want
-            - Change the body-text after that to a quick introduction to what you do
-            - Edit the button text if you feel like it. It will link to the projects section below.
-          -->
-        <div id="portfolio-header-text-container">
-            <div class="header-text">
-              <span class="main-title">Hey, I'm Sid</span>
-              <div class="body-text">I’m a software engineer based in San Diego interested in applied machine learning, platform engineering, and AI-optimized hardware. I'm currently working at <a class="inline-link" href="https://www.intel.com/">Intel</a>.</div>
-            </div>
-        </div>
+      <div class="page active" data-page="about">
+        <div data-section="./sections/header.html"></div>
+        <div data-section="./sections/about.html"></div>
       </div>
-
-      <!-- ABOUT SECTION -->
-      <!--
-        TODO
-
-        - Change the subheader-text to whatever header you want
-        - Add paragraphs using the <div class="body-text"></div> elements in the "about-section-content"
-      -->
-      <div id="about-section">
-        <span class="subheader-text">Background / About Me</span>
-        <div class="about-section-content">
-          <div class="body-text">My name is Sidharth Srinath - I'm UC San Diego computer science graduate and currently a Graphics Content Validation Engineer at Intel. I have previously worked at <a class="inline-link" href="https://electronics.sony.com/">Sony Electronics</a>, <a class="inline-link" href="https://www.salk.edu/">the Salk Institute for Biological Studies</a> (at the <a class="inline-link" href="https://talmolab.org/">Talmo Lab</a>), <a class="inline-link" href="https://www.linkedin.com/company/medsmart-medical-technology/">MedSmart</a> and <a class="inline-link" href="https://www.werfen.com/na/en">Werfen</a> as a software engineering intern and at UCSD's CSE department as an instructional assistant
-            (
-                <a class="inline-link" href="https://catalog.ucsd.edu/courses/CSE.html#cse8a">CSE 8A</a>,
-                <a class="inline-link" href="https://catalog.ucsd.edu/courses/CSE.html#cse8a">CSE 12</a>).
-          Relevant coursework include
-            <a class="inline-link" href="https://catalog.ucsd.edu/courses/CSE.html#cse110">Software Engineering Principles</a>,
-            <a class="inline-link" href="https://catalog.ucsd.edu/courses/CSE.html#cse120">Operating Systems</a>,
-            <a class="inline-link" href="https://catalog.ucsd.edu/courses/CSE.html#cse140">Digital Systems/Design</a>,
-            <a class="inline-link" href="https://catalog.ucsd.edu/courses/COGS.html#cogs108">Data Science</a>,
-            <a class="inline-link" href="https://catalog.ucsd.edu/courses/MATH.html#math183">Probability & Statistics</a>,
-            <a class="inline-link" href="https://catalog.ucsd.edu/courses/CSE.html#cse151a">Intro. Machine Learning</a>,
-            <a class="inline-link" href="https://catalog.ucsd.edu/courses/CSE.html#cse151b">Deep Learning:Neural Networks</a>,
-            <a class="inline-link" href="https://catalog.ucsd.edu/courses/CSE.html#cse156">Statistical Natural Language Processing</a> and more.</div>
-        </div>
-        <div class="body-text">Aside from programming, I enjoy playing and recording the guitar using FL Studio and Garageband.</div>
+      <div class="page" data-page="resume">
+        <div data-section="./sections/experience.html"></div>
       </div>
-
-
-      <div id="my-experience-section">
-        <span class="subheader-text">Selected Experiences</span>
-        <div class="experience-list">
-          <div class="experience-item">
-            <div class="experience-header">
-              <span class="experience-title">Graphics Content Validation Engineer</span>
-              <span class="experience-date">July 2024 - Present</span>
-            </div>
-            <span class="experience-org">Intel</span>
-            <p class="body-text">Writing AI and graphics compute workloads for a new generation of computer hardware.</p>
-          </div>
-
-          <div class="experience-item">
-            <div class="experience-header">
-              <span class="experience-title">Data Science Intern</span>
-              <span class="experience-date">Winter 2024</span>
-            </div>
-            <span class="experience-org">Sony Electronics</span>
-            <p class="body-text">Tackling Computer Vision and Machine Learning challenges as part of the Sony Semiconductors Solutions (SSS) team.</p>
-          </div>
-
-          <div class="experience-item">
-            <div class="experience-header">
-              <span class="experience-title">Student Researcher</span>
-              <span class="experience-date">Fall 2023</span>
-            </div>
-            <span class="experience-org">Salk Institute of Biological Studies</span>
-            <p class="body-text">Working on large-scale machine learning pipelines and state-of-the-art computer vision models for efficient pose estimation through SLEAP under Dr. Talmo Pereira.</p>
-          </div>
-
-          <div class="experience-item">
-            <div class="experience-header">
-              <span class="experience-title">Software Engineering Intern</span>
-              <span class="experience-date">Summer 2022</span>
-            </div>
-            <span class="experience-org">Werfen North America</span>
-            <p class="body-text">Designed comprehensive integration/unit testing, remote procedure call libraries, and robust GUI(s) for blood coagulation medical devices.</p>
-          </div>
-
-          <div class="experience-item">
-            <div class="experience-header">
-              <span class="experience-title">Software Engineering Intern</span>
-              <span class="experience-date">Fall 2021</span>
-            </div>
-            <span class="experience-org">MEDSmart Inc.</span>
-            <p class="body-text">Built data pipelines using boto3 and GraphQL to query historical sales data from AWS (DynamoDB) and perform continuous inferences to predict future medication quantities using LSTM and Autoregression predictive models.</p>
-          </div>
-        </div>
-         <span style="font-size:x-small">*Further experiences and more details on resume @ (top & bottom of site).</span>
-
-        </div>
-
-      <div id="my-work-section">
-        <span class="subheader-text">Projects</span>
-
-        <div class="experience-list">
-          <div class="experience-item">
-            <div class="experience-header">
-              <span class="experience-title">Spotify Music Clustering</span>
-              <span class="experience-date">Python</span>
-            </div>
-            <p class="body-text">Takes input of a Spotify playlist id and splits the playlist’s songs into low and high-energy clusters using K-means clustering techniques. Uses OAuth for authorization workflow.</p>
-            <a class="inline-link" href="https://github.com/sidharthsrinath/spotipy-working">See Code</a>
-          </div>
-
-          <div class="experience-item">
-            <div class="experience-header">
-              <span class="experience-title">Snake Game AI Bot</span>
-              <span class="experience-date">Python</span>
-            </div>
-            <p class="body-text">Utilizes the NEAT-Python framework and reinforcement learning techniques propelled by genetically evolving neural networks to develop a model that iteratively learns to defeat snake game.</p>
-            <a class="inline-link" href="https://github.com/sidharthsrinath/reinforced_learning_snake_game">See Code</a>
-          </div>
-
-          <div class="experience-item">
-            <div class="experience-header">
-              <span class="experience-title">Social Compass App</span>
-              <span class="experience-date">Java, XML, CSS</span>
-            </div>
-            <p class="body-text">Developed an Android app that displays friends’ locations in comparison to yours in real time. Process planned and documented in github projects and structured with agile principles.</p>
-            <a class="inline-link" href="https://github.com/sidharthsrinath/cse-110-project-cse-110-team-31">See Code</a>
-          </div>
-
-          <div class="experience-item">
-            <div class="experience-header">
-              <span class="experience-title">Image Label Generator</span>
-              <span class="experience-date">Python</span>
-            </div>
-            <p class="body-text">Worked with a team to develop an encoder(convolutional)-decoder(LSTM) structured neural network that generates intelligent tags for image inputs.</p>
-          </div>
-
-          <div class="experience-item">
-            <div class="experience-header">
-              <span class="experience-title">Intelligent EQ VST</span>
-              <span class="experience-date">C++</span>
-            </div>
-            <p class="body-text">Currently in progress. Using JUCE C++ framework to read in audio data from a DAW host and use DSP principles to manipulate sound signals in order to achieve intelligent equalization effects.</p>
-          </div>
-
-          <div class="experience-item">
-            <div class="experience-header">
-              <span class="experience-title">Medicine Forecast System</span>
-              <span class="experience-date">Python</span>
-            </div>
-            <p class="body-text">Used various regression techniques to predict future medicine demand from historical data allowing pharmacies to cut costs of unused medicine as well as avoid the abuse of excess medication.</p>
-          </div>
-        </div>
+      <div class="page" data-page="projects">
+        <div data-section="./sections/projects.html"></div>
       </div>
-      </div>
-
-
     </div>
 
     <!-- FOOTER -->
@@ -210,13 +43,9 @@
       <a class="icon-link" target="_blank" href="https://github.com/sidharthsrinath/">
         <image src="./assets/icons/github.svg" class="footer-icon"/>
       </a>
-
       <a class="icon-link" target="_blank" href="mailto:ssrinath@ucsd.edu">
         <image src="./assets/icons/mail.svg" class="footer-icon"/>
       </a>
-      <!-- <a class="icon-link" target="_blank" href="https://drive.google.com/file/d/1ZBRSPyAXFCMi7dim-bOf0CSrHwhtekZ9/view?usp=sharing">
-        <image src="./assets/icons/resume.svg" class="footer-icon"/>
-      </a> -->
     </div>
 
 	</body>
