@@ -11,8 +11,6 @@ html {
 
 body {
   margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Main Page Layout */
@@ -79,18 +77,14 @@ body {
 }
 
 .experience-title {
-  font-size: 18px;
-  font-weight: 600;
 }
 
 .experience-date {
-  font-size: 14px;
   color: #97999a;
 }
 
 .experience-org {
-  color: #2E86C1;
-  font-size: 15px;
+  color: #97999a;
 }
 
 .experience-item .body-text {

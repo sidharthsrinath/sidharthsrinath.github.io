@@ -1,21 +1,41 @@
 
 body {
   text-align: right;
-  font-family: 'Varela Round', serif;
-  letter-spacing: 2px;
+  font-family: 'Geist Mono', sans-serif;
+  /* letter-spacing: 2px; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .main-title {
   font-size: 60px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .subheader-text {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .body-text {
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.nav-link {
+  font-size: 18px;
   font-weight: 500;
+}
+
+.experience-title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.experience-date {
+  font-size: 14px;
+}
+
+.experience-org {
+  font-size: 14px;
 }
