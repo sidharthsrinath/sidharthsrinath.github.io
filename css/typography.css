@@ -2,7 +2,6 @@
 body {
   text-align: right;
   font-family: 'Geist Mono', sans-serif;
-  /* letter-spacing: 2px; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -13,7 +12,7 @@ body {
 }
 
 .subheader-text {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
 }
 
@@ -23,12 +22,12 @@ body {
 }
 
 .nav-link {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
 }
 
 .experience-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
 }
 

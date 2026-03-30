@@ -16,7 +16,8 @@ body {
 /* Main Page Layout */
 
 #main-content {
-  margin: 50px 425px;
+  margin: 30px 425px;
+  margin-left: 20%;
 }
 
 /* Portfolio Header */
@@ -45,6 +46,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 34px;
+  margin-left: 20%;
 }
 
 /* Work Section */
@@ -76,9 +78,6 @@ body {
   align-items: baseline;
 }
 
-.experience-title {
-}
-
 .experience-date {
   color: #97999a;
 }
@@ -87,8 +86,9 @@ body {
   color: #97999a;
 }
 
-.experience-item .body-text {
+.experience-item {
   margin: 4px 0 0 0;
+  margin-left: 20%;
 }
 
 /* Responsive */
@@ -108,12 +108,21 @@ body {
 @media only screen and (max-width: 1000px) {
   #main-content {
     margin: 50px 75px;
+    margin-left: 10%;
+  }
+
+  .about-section-content {
+    margin-left: 10%;
+  }
+
+  .experience-item {
+    margin-left: 10%;
   }
 }
 
 @media only screen and (max-width: 800px) {
   #main-content {
-    margin: 40px 50px;
+    margin: 40px 65px;
   }
 
   #portfolio-header {
@@ -123,6 +132,6 @@ body {
 
 @media only screen and (max-width: 600px) {
   #main-content {
-    margin: 30px 20px;
+    margin: 30px 35px;
   }
 }
