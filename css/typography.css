@@ -45,3 +45,13 @@ body {
 .project-tech {
   font-size: 14px;
 }
+
+.skill-category {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.skill-values {
+  font-size: 14px;
+  font-weight: 400;
+}
