@@ -41,7 +41,7 @@ a.icon-link:hover {
 .nav-link.active {
   color: black;
   text-decoration: underline;
-  text-decoration-style: wavy;
+  text-decoration-style: dashed;
 }
 
 /* Page visibility */
@@ -90,23 +90,12 @@ a.icon-link:hover {
 
 .inline-link {
   color: black;
-  text-decoration: underline;
-  text-decoration-style: wavy;
-}
-
-.inline-link-ai {
-  font-size: 11px;
-  color: #2E86C1;
-  text-decoration: underline;
+  text-decoration-style: dashed;
 }
 
 .inline-link:hover {
+  color: #97999a;
   text-decoration: none;
-  color: #2e86c17f;
-}
-
-.inline-link-ai:hover {
-  color: #A93226;
 }
 
 /* Footer Styling */
